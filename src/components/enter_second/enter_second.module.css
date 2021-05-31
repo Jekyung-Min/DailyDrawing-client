@@ -1,0 +1,134 @@
+.section {
+  padding: 5rem 0 4rem;
+}
+
+.container {
+  max-width: 840px;
+  margin-left: var(--mb-1-5);
+  margin-right: var(--mb-1-5);
+}
+
+.section_title {
+  font-size: var(--h1-font-size);
+  color: var(--title-color);
+  margin-bottom: var(--mb-0-75);
+  text-align: center;
+}
+
+.section_subtitle {
+  display: block;
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-semi-bold);
+  margin-bottom: var(--mb-3);
+  text-align: center;
+}
+
+.about_container {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.about_img {
+  width: 320px;
+  border-radius: 0.5rem;
+  justify-self: center;
+  align-self: center;
+}
+
+.about_description {
+  font-size: var(--normal-font-size);
+  text-align: center;
+  margin-bottom: var(--mb-2-5);
+}
+
+.about_info {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: var(--mb-2-5);
+}
+
+.about_info_title {
+  display: block;
+  text-align: center;
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-semi-bold);
+  color: var(--title-color);
+}
+
+.about_info_name {
+  display: block;
+  text-align: center;
+  font-size: var(--smaller-font-size);
+}
+
+.about_buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  display: inline-block;
+  background-color: var(--first-color);
+  color: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-weight: var(--font-medium);
+}
+
+.button:hover {
+  background-color: var(--first-color-alt);
+}
+.button_flex {
+  display: inline-flex;
+  align-items: center;
+}
+
+@media screen and (min-width: 350px) {
+  .container {
+    margin-left: var(--mb-1);
+    margin-right: var(--mb-1);
+  }
+  .about_container {
+    display: grid;
+    gap: 3rem;
+  }
+}
+
+@media screen and (min-width: 568px) {
+}
+@media screen and (min-width: 870px) {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .about_container {
+    column-gap: 3rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about_img {
+    width: 400px;
+  }
+
+  .about_description {
+    text-align: initial;
+  }
+
+  .about_info {
+    justify-content: space-between;
+  }
+
+  .about_buttons {
+    justify-content: initial;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .about_img {
+    width: 430px;
+    height: 290px;
+  }
+  .about_container {
+    column-gap: 5rem;
+  }
+}
