@@ -1,0 +1,77 @@
+.container {
+  max-width: 1000px;
+  margin-left: var(--mb-1-5);
+  margin-right: var(--mb-1-5);
+}
+
+.section {
+  padding-top: 5rem;
+}
+
+.section_title {
+  font-size: var(--h1-font-size);
+  color: var(--title-color);
+  margin-bottom: var(--mb-0-5);
+  text-align: center;
+}
+
+.section_subtitle {
+  display: block;
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-semi-bold);
+  margin-bottom: var(--mb-3);
+  text-align: center;
+}
+
+.accessory_container {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.accessory_content {
+  position: relative;
+  display: grid;
+  padding: 0.25rem 0.75rem 0.75rem;
+  background-color: var(--container-color);
+  box-shadow: 0 2px 6px rgba(65, 11, 16, 0.15);
+  border-radius: 1rem;
+}
+
+.accessory_content:hover {
+  box-shadow: 0 3px 12px rgba(65, 11, 16, 0.15);
+}
+
+.accessory_img {
+  width: 150px;
+  justify-self: center;
+}
+
+.seoul_museum {
+  filter: invert(var(--invert-status));
+}
+
+@media screen and (min-width: 700px) {
+  .accessory_container {
+    grid-template-columns: repeat(3, 200px);
+    justify-content: center;
+  }
+
+  .accessory_content {
+    padding: 1.5rem 1.5rem 1.5rem;
+  }
+
+  .accessory_img {
+    width: 200px;
+  }
+}
+
+@media screen and (min-width: 968px) {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .accessory_img {
+    width: 250px;
+  }
+}
