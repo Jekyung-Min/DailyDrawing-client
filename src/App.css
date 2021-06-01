@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&family=Poppins:wght@600&display=swap");
 /*==================== VARIABLES CSS ====================*/
 :root {
+  --invert-status: 0;
   --header-height: 3rem;
 
   /*========== Colors ==========*/
@@ -122,6 +123,7 @@ img {
 
 body.dark_theme {
   /* HSL color mode */
+  --invert-status: 1;
   --first-color-second: hsl(var(--hue-color), 30%, 8%);
   --title-color: hsl(var(--hue-color), 8%, 95%);
   --text-color: hsl(var(--hue-color), 8%, 75%);
