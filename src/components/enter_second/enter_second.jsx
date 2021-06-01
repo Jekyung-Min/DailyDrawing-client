@@ -34,21 +34,22 @@ const EnterSecond = (props) => {
             <div>
               <span className={`${styles.about_info_title}`}>07+</span>
               <span className={`${styles.about_info_name}`}>
-                Years <br /> experience
+                운영
+                <br /> 총기간
               </span>
             </div>
 
             <div>
               <span className={`${styles.about_info_title}`}>2,000,000+</span>
               <span className={`${styles.about_info_name}`}>
-                Works <br /> completed
+                누적 <br /> 완성작
               </span>
             </div>
 
             <div>
               <span className={`${styles.about_info_title}`}>500+</span>
               <span className={`${styles.about_info_name}`}>
-                Partner <br /> companies
+                협력 <br /> 파트너사
               </span>
             </div>
           </div>
