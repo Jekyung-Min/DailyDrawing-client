@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Footer from "../../components/footer/footer";
 import FooterBelow from "../../components/footer_below/footer_below";
 import Navbar from "../../components/navbar/navbar";
@@ -8,16 +8,35 @@ import EnterThird from "../../components/enter_third/enter_third";
 import EnterFourth from "../../components/enter_fourth/enter_fourth";
 import EnterFifth from "../../components/enter_fifth/enter_fifth";
 import EnterSixth from "../../components/enter_sixth/enter_sixth";
+import { useLocation } from "react-router";
 const EnterPage = (props) => {
+  const location = useLocation();
+  const aboutRef = useRef();
+  const partnersRef = useRef();
+  const courseRef = useRef();
+  const portfolioRef = useRef();
+
+  const scrollToCourse = () => {
+    courseRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
     <>
-      <Navbar></Navbar>
-      <EnterFirst></EnterFirst>
+      <Navbar
+        aboutRef={aboutRef}
+        partnersRef={partnersRef}
+        courseRef={courseRef}
+        portfolioRef={portfolioRef}
+      ></Navbar>
+      <EnterFirst scrollToCourse={scrollToCourse}></EnterFirst>
       <EnterThird></EnterThird>
-      <EnterSecond></EnterSecond>
-      <EnterFourth></EnterFourth>
-      <EnterFifth></EnterFifth>
-      <EnterSixth></EnterSixth>
+      <EnterSecond aboutRef={aboutRef}></EnterSecond>
+      <EnterFourth partnersRef={partnersRef}></EnterFourth>
+      <EnterFifth courseRef={courseRef}></EnterFifth>
+      <EnterSixth portfolioRef={portfolioRef}></EnterSixth>
       <FooterBelow></FooterBelow>
       <Footer></Footer>
     </>
