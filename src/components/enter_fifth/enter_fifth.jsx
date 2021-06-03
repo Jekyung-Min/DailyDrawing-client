@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./enter_fifth.module.css";
-const EnterFifth = (props) => {
+const EnterFifth = ({ courseRef }) => {
   const [isBefore, setIsBefore] = useState(true);
   const [isAfter, setIsAfter] = useState(false);
   const handleIsBefore = () => {
@@ -12,7 +12,10 @@ const EnterFifth = (props) => {
     setIsBefore(false);
   };
   return (
-    <section className={`${styles.qualification} ${styles.section}`}>
+    <section
+      ref={courseRef}
+      className={`${styles.qualification} ${styles.section}`}
+    >
       <h2 className={`${styles.section_title}`}>DailyDrawing</h2>
       <span className={`${styles.section_subtitle}`}>
         DailyDrawing 전체과정
