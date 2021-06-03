@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./enter_second.module.css";
 
-const EnterSecond = (props) => {
+const EnterSecond = ({ aboutRef }) => {
   return (
-    <div className={`${styles.about} ${styles.section}`}>
+    <div ref={aboutRef} className={`${styles.about} ${styles.section}`}>
       <h2 className={`${styles.section_title}`}>DailyDrawing</h2>
       <span className={`${styles.section_subtitle}`}>
         DailyDrawing이 걸어온 길
