@@ -22,52 +22,6 @@ const Footer = (props) => {
           <Link to="/" className={styles.logo}>
             DailyDrawing
           </Link>
-          <div
-            className={
-              isToggle ? `${styles.menu} ${styles.show_menu}` : `${styles.menu}`
-            }
-          >
-            <ul className={`${styles.list} ${styles.grid}`}>
-              <li>
-                <a href="/" className={styles.link}>
-                  <i className={`uil uil-palette ${styles.icon}`}></i>About
-                </a>
-              </li>
-              <li>
-                <a href="" className={styles.link}>
-                  <i className={`uil uil-user ${styles.icon} `}></i> People
-                </a>
-              </li>
-              <li>
-                <a href="" className={styles.link}>
-                  <i className={`uil uil-building ${styles.icon}`}></i>
-                  Organizations
-                </a>
-              </li>
-              <li>
-                <a href="" className={styles.link}>
-                  <i className={`uil uil-scenery ${styles.icon}`}></i>
-                  Participate
-                </a>
-              </li>
-              <li>
-                <a href="" className={styles.link}>
-                  <i className={`uil uil-scenery ${styles.icon}`}></i>Community
-                </a>
-              </li>
-              <li>
-                <a href="" className={styles.link}>
-                  <i className={`uil uil-scenery ${styles.icon}`}></i> Login
-                </a>
-              </li>
-            </ul>
-            <i
-              className={`uil uil-times ${styles.close}`}
-              onClick={() => {
-                handleToggle();
-              }}
-            ></i>
-          </div>
           <div className={styles.btns}>
             <i
               className={
@@ -79,14 +33,6 @@ const Footer = (props) => {
                 handleChangeTheme();
               }}
             ></i>
-            <div className={styles.toggle}>
-              <i
-                className="uil uil-apps"
-                onClick={() => {
-                  handleToggle();
-                }}
-              ></i>
-            </div>
           </div>
         </div>
       </div>
