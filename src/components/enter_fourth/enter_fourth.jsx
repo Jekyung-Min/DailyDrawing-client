@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./enter_fourth.module.css";
 
-const EnterFourth = (props) => {
+const EnterFourth = ({ partnersRef }) => {
   return (
-    <div className={`${styles.container} ${styles.section}`}>
+    <div ref={partnersRef} className={`${styles.container} ${styles.section}`}>
       <h2 className={`${styles.section_title}`}>DailyDrawing</h2>
       <span className={`${styles.section_subtitle}`}>
         DailyDrawing과 함께하고 있는 대표 파트너사입니다.
