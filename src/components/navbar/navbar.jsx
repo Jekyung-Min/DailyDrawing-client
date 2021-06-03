@@ -4,7 +4,15 @@ import Button from "../button/button";
 import { Link } from "react-router-dom";
 import styles from "./navbar.module.css";
 
-const Navbar = ({ link, accessToken, openNoAccessModal }) => {
+const Navbar = ({
+  link,
+  accessToken,
+  openNoAccessModal,
+  aboutRef,
+  partnersRef,
+  courseRef,
+  portfolioRef,
+}) => {
   const history = useHistory();
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
@@ -25,8 +33,40 @@ const Navbar = ({ link, accessToken, openNoAccessModal }) => {
   const scrollToStadium = () => {
     setClick(false);
     window.scroll({
-      top: 990,
+      top: 40,
       behavior: "smooth",
+    });
+  };
+
+  const scrollToAbout = () => {
+    setClick(false);
+    aboutRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  const scrollToPartners = () => {
+    setClick(false);
+    partnersRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  const scrollToCourse = () => {
+    setClick(false);
+    courseRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
+  const scrollPortfolio = () => {
+    setClick(false);
+    portfolioRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
     });
   };
 
@@ -39,7 +79,7 @@ const Navbar = ({ link, accessToken, openNoAccessModal }) => {
   return (
     <>
       <div className={styles.container}>
-        <Link to="/community" className={styles.logo} onClick={closeMobileMenu}>
+        <Link to="/" className={styles.logo} onClick={closeMobileMenu}>
           <i className={`fas fa-palette ${styles.fa_palette}`} />
           DailyDrawing
         </Link>
@@ -63,7 +103,7 @@ const Navbar = ({ link, accessToken, openNoAccessModal }) => {
                 className={styles.link}
                 onClick={() =>
                   history.push({
-                    pathname: "/main",
+                    pathname: "/",
                     state: {
                       scroll: 1,
                     },
@@ -88,18 +128,18 @@ const Navbar = ({ link, accessToken, openNoAccessModal }) => {
                   history.push({
                     pathname: "/",
                     state: {
-                      scroll: 1,
+                      scroll: 2,
                     },
                   })
                 }
               >
-                People
+                Statistics
               </div>
             </li>
           ) : (
             <li className={styles.item}>
-              <div className={styles.link} onClick={scrollToStadium}>
-                People
+              <div className={styles.link} onClick={scrollToAbout}>
+                Statistics
               </div>
             </li>
           )}
@@ -109,62 +149,86 @@ const Navbar = ({ link, accessToken, openNoAccessModal }) => {
                 className={styles.link}
                 onClick={() =>
                   history.push({
-                    pathname: "main",
+                    pathname: "/",
                     state: {
-                      scroll: 1,
+                      scroll: 3,
                     },
                   })
                 }
               >
-                Institutions
+                Partners
               </div>
             </li>
           ) : (
             <li className={styles.item}>
-              <div className={styles.link} onClick={scrollToStadium}>
-                Institutions
+              <div className={styles.link} onClick={scrollToPartners}>
+                Partners
               </div>
             </li>
           )}
-          <li className={styles.item}>
-            {accessToken ? (
-              <Link
-                to="/list"
-                className={styles.link}
-                onClick={closeMobileMenu}
-              >
-                Participate
-              </Link>
-            ) : (
+          {/* {link === "listPage" ? (
+            <li className={styles.item}>
               <div
                 className={styles.link}
                 onClick={() => {
-                  closeMobileMenu();
+                  history.push({
+                    pathname: "/",
+                    state: {
+                      scroll: 4,
+                    },
+                  });
                 }}
               >
-                Participate
+                Course
               </div>
-            )}
+            </li>
+          ) : (
+            <li className={styles.item}>
+              <div className={styles.link} onClick={scrollToCourse}>
+                Course
+              </div>
+            </li>
+          )}
+          {link === "listPage" ? (
+            <li className={styles.item}>
+              <div
+                className={styles.link}
+                onClick={() =>
+                  history.push({
+                    pathname: "/",
+                    state: {
+                      scroll: 5,
+                    },
+                  })
+                }
+              >
+                Portfolio
+              </div>
+            </li>
+          ) : (
+            <li className={styles.item}>
+              <div className={styles.link} onClick={scrollPortfolio}>
+                Portfolio
+              </div>
+            </li>
+          )} */}
+          <li className={styles.item}>
+            <Link
+              to="/participate"
+              className={styles.link}
+              onClick={closeMobileMenu}
+            >
+              Participate
+            </Link>
           </li>
           <li className={styles.item}>
-            {accessToken ? (
-              <Link
-                to="/community"
-                className={styles.link}
-                onClick={closeMobileMenu}
-              >
-                Community
-              </Link>
-            ) : (
-              <div
-                className={styles.link}
-                onClick={() => {
-                  closeMobileMenu();
-                }}
-              >
-                Community
-              </div>
-            )}
+            <Link
+              to="/community"
+              className={styles.link}
+              onClick={closeMobileMenu}
+            >
+              Community
+            </Link>
           </li>
           {accessToken ? (
             <li>

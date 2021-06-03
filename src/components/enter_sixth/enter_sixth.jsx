@@ -11,9 +11,12 @@ import styles from "./enter_sixth.module.css";
 
 SwiperCore.use([Navigation, Pagination, Autoplay, Mousewheel]);
 
-const EnterSixth = (props) => {
+const EnterSixth = ({ portfolioRef }) => {
   return (
-    <section className={`${styles.portfolio} ${styles.section}`}>
+    <section
+      ref={portfolioRef}
+      className={`${styles.portfolio} ${styles.section}`}
+    >
       <h2 className={`${styles.section_title}`}>DailyDrawing</h2>
       <span className={`${styles.section_subtitle}`}>
         DailyDrawing 수료생 대표작품
@@ -204,7 +207,7 @@ const EnterSixth = (props) => {
 
                 <div className={`${styles.portfolio_data}`}>
                   <h3 className={`${styles.portfolio_title}`}>
-                    이규진 - Eyes of Truth
+                    백현준 - Eyes of Truth
                   </h3>
                   <p className={`${styles.portfolio_description}`}>
                     국립현대미술관 주관대회 혁신상

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./enter_first.module.css";
 
-const EnterFirst = (props) => {
+const EnterFirst = ({ scrollToCourse }) => {
   return (
     <div className={`${styles.home} ${styles.section}`}>
       <div className={`${styles.container}`}>
@@ -27,14 +27,14 @@ const EnterFirst = (props) => {
         </div>
 
         <div className={`${styles.scroll}`}>
-          <a
-            href="/"
+          <div
             className={`${styles.scroll_button} ${styles.button_flex}`}
+            onClick={scrollToCourse}
           >
             <i class={`uil uil-mouse-alt ${styles.scroll_mouse}`}></i>
             <span className={`${styles.scroll_name}`}>더보기</span>
             <i className={`uil uil-arrow-down ${styles.scroll_arrow}`}></i>
-          </a>
+          </div>
         </div>
       </div>
     </div>

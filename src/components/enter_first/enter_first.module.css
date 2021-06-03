@@ -61,12 +61,13 @@
   display: inline-flex;
   align-items: center;
 }
-.scroll {
+/* .scroll {
   display: none;
-}
+} */
 
 .scroll_button {
   color: var(--first-color);
+  cursor: pointer;
   transition: 0.3s;
 }
 
@@ -103,6 +104,9 @@
 }
 
 @media screen and (min-width: 568px) {
+  .scroll {
+    margin-left: var(--mb-2);
+  }
   .content {
     grid-template-columns: max-content 1fr 1fr;
   }
@@ -125,6 +129,7 @@
   }
   .scroll {
     display: block;
+    margin-left: 0;
   }
   .scroll_button {
     margin-left: 3rem;
@@ -140,5 +145,9 @@
   }
   .social {
     transform: translateX(-6rem);
+  }
+  .scroll {
+    display: block;
+    margin-left: 0;
   }
 }

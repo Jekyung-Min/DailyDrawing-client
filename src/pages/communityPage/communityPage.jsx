@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import styles from "./communityPage.module.css";
 import { Link } from "react-router-dom";
@@ -66,7 +66,7 @@ const CommunityPage = () => {
 
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar link="listPage"></Navbar>
       <CommunityHeader onSubmit={onSearchSubmit} />
       <CommunityMain pins={pins} />
       <Footer></Footer>
