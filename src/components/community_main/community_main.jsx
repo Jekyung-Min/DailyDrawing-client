@@ -5,7 +5,7 @@ import Fade from "react-reveal/Fade";
 import { useSelector } from "react-redux";
 
 const CommunityMain = ({ openModal }) => {
-  const postsState = useSelector(state => state.postReducer);
+  const postsState = useSelector((state) => state.postReducer);
   const postsInfo = postsState.allPostsInfo;
   return (
     <div className={styles.wrapper}>
@@ -13,7 +13,7 @@ const CommunityMain = ({ openModal }) => {
         {postsInfo.length > 0
           ? postsInfo.map((postData, idx) => (
               <>
-                <Fade top duration={1800} distance={"15px"}>
+                <Fade top duration={1800} distance={"15px"} key={idx}>
                   <CommunityPin
                     openModal={openModal}
                     postData={postData}
