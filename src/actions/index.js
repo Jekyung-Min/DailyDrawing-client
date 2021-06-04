@@ -1,5 +1,16 @@
 import axios from "axios";
 
+//middlewares
+export const fetchData = (url, config, action) => async dispatch => {
+  try {
+    const { data } = await axios.get(url, config);
+    let result = data;
+
+    dispatch(action(result));
+  } catch (err) {
+    return console.log(err);
+  }
+};
 // action types
 // sign part
 export const SIGN_IN = "SIGN_IN";
@@ -57,10 +68,11 @@ export const getPostInfo = ({ post }) => {
   };
 };
 
-export const getAllPostInfo = ({ allPosts }) => {
+export const getAllPostInfo = ({ postDatas }) => {
+  console.log(postDatas);
   return {
     type: GETALL_POST_INFO,
-    payload: allPosts,
+    payload: postDatas,
   };
 };
 
