@@ -25,7 +25,7 @@ const EnterPage = (props) => {
   };
 
   const handleScrollPossile = () => {
-    if (window.scrollY >= 3000) {
+    if (window.scrollY >= 2300) {
       setScrollPossible(true);
     }
   };
