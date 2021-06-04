@@ -7,9 +7,23 @@ import CommunityMain from "../../components/community_main/community_main";
 import Navbar from "../../components/navbar/navbar";
 import unsplash from "../../api/unsplash";
 import Footer from "../../components/footer/footer";
+import { CommunityModal } from "../../components/community_modal/community_modal";
 
 const CommunityPage = () => {
+  const [showModal, setShowModal] = useState(false);
   const [pins, setNewPins] = useState([]);
+
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+    getNewPins();
+  }, []);
+
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
 
   const getImages = (term) => {
     return unsplash.get("https://api.unsplash.com/search/photos", {
@@ -60,19 +74,16 @@ const CommunityPage = () => {
     //   setNewPins(results);
     // });
   };
-  useEffect(() => {
-    window.scroll({
-      top: 0,
-      behavior: "smooth",
-    });
-    getNewPins();
-  }, []);
 
   return (
     <>
+      <CommunityModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+      ></CommunityModal>
       <Navbar link="listPage"></Navbar>
       <CommunityHeader onSubmit={onSearchSubmit} />
-      <CommunityMain pins={pins} />
+      <CommunityMain openModal={openModal} pins={pins} />
       <Footer></Footer>
     </>
   );
