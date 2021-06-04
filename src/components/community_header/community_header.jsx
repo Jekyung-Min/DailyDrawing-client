@@ -5,7 +5,7 @@ import styles from "./community_header.module.css";
 
 const CommunityHeader = ({ onSubmit }) => {
   const [input, setInput] = useState("");
-  const onSearchSubmit = (e) => {
+  const onSearchSubmit = e => {
     e.preventDefault();
     onSubmit(input);
   };
@@ -17,7 +17,11 @@ const CommunityHeader = ({ onSubmit }) => {
             <i className={`fas fa-search ${styles.fa_search}`}></i>
           </IconButton>
           <form>
-            <input type="text" onChange={(e) => setInput(e.target.value)} />
+            <input
+              placeholder="닉네임이나 태그로 검색해보세요! ex) jehyun, 서양화"
+              type="text"
+              onChange={e => setInput(e.target.value)}
+            />
             <button type="submit" onClick={onSearchSubmit}></button>
           </form>
         </div>
