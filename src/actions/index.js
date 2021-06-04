@@ -69,7 +69,6 @@ export const getPostInfo = ({ post }) => {
 };
 
 export const getAllPostInfo = ({ postDatas }) => {
-  console.log(postDatas);
   return {
     type: GETALL_POST_INFO,
     payload: postDatas,
