@@ -21,4 +21,5 @@ export const initialState = {
   postComments: [],
   postTags: [],
   likes: { count: null, myLikes: [] },
+  search: [],
 };
