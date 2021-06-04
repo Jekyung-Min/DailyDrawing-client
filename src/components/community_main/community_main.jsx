@@ -3,7 +3,7 @@ import styles from "./community_main.module.css";
 import CommunityPin from "../community_pin/community_pin";
 import Fade from "react-reveal/Fade";
 
-const CommunityMain = ({ pins }) => {
+const CommunityMain = ({ pins, openModal }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
@@ -11,8 +11,8 @@ const CommunityMain = ({ pins }) => {
           const { urls } = pin;
           return (
             <>
-              <Fade top duration={1800} distance={"30px"}>
-                <CommunityPin urls={urls} key={idx} />
+              <Fade top duration={1800} distance={"15px"}>
+                <CommunityPin openModal={openModal} urls={urls} key={idx} />
               </Fade>
             </>
           );
