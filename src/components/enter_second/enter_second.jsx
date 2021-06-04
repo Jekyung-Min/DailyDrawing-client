@@ -11,14 +11,14 @@ const EnterSecond = ({ aboutRef }) => {
       </span>
 
       <div className={`${styles.about_container} ${styles.container}`}>
-        <Fade left duration={1800} distance={"30px"}>
+        <Fade left duration={1400} distance={"30px"}>
           <img
             src="/images/dailydrawing1.jpg"
             alt="dailydrawing1"
             className={`${styles.about_img}`}
           ></img>
         </Fade>
-        <Fade right duration={1800} distance={"30px"}>
+        <Fade right duration={1400} distance={"30px"}>
           <div className={`${styles.about_data}`}>
             <p className={`${styles.about_description}`}>
               약 7년간 220,000명이 참여해주셨습니다.
