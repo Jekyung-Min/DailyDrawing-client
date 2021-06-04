@@ -10,7 +10,8 @@ import EnterFifth from "../../components/enter_fifth/enter_fifth";
 import EnterSixth from "../../components/enter_sixth/enter_sixth";
 import { useLocation } from "react-router";
 const EnterPage = (props) => {
-  const location = useLocation();
+  const [scrollPossible, setScrollPossible] = useState(false);
+  // const location = useLocation();
   const aboutRef = useRef();
   const partnersRef = useRef();
   const courseRef = useRef();
@@ -23,6 +24,16 @@ const EnterPage = (props) => {
     });
   };
 
+  const handleScrollPossile = () => {
+    if (window.scrollY >= 3000) {
+      setScrollPossible(true);
+    }
+  };
+
+  window.addEventListener("scroll", () => {
+    handleScrollPossile();
+  });
+
   return (
     <>
       <Navbar
@@ -31,7 +42,10 @@ const EnterPage = (props) => {
         courseRef={courseRef}
         portfolioRef={portfolioRef}
       ></Navbar>
-      <EnterFirst scrollToCourse={scrollToCourse}></EnterFirst>
+      <EnterFirst
+        scrollToCourse={scrollToCourse}
+        scrollPossible={scrollPossible}
+      ></EnterFirst>
       <EnterThird></EnterThird>
       <EnterSecond aboutRef={aboutRef}></EnterSecond>
       <EnterFourth partnersRef={partnersRef}></EnterFourth>
