@@ -31,7 +31,13 @@ export const signIn = ({ userData, accessToken }) => {
 export const signOut = () => {
   return {
     type: SIGN_OUT,
-    payload: null,
+    payload: {
+      id: null,
+      email: null,
+      nickname: null,
+      profileImg: null,
+      accessToken: null,
+    },
   };
 };
 
