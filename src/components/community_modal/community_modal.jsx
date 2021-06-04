@@ -13,14 +13,14 @@ export const CommunityModal = ({ showModal, setShowModal }) => {
     transform: showModal ? `translateY(6%)` : `translateY(-100%)`,
   });
 
-  const closeModal = e => {
+  const closeModal = (e) => {
     if (backRef.current === e.target) {
       setShowModal(false);
     }
   };
 
   const keyPress = useCallback(
-    e => {
+    (e) => {
       if (showModal && e.key === "Escape") {
         setShowModal(false);
       }
@@ -33,29 +33,42 @@ export const CommunityModal = ({ showModal, setShowModal }) => {
     return () => document.removeEventListener("keydown", keyPress);
   }, [keyPress]);
 
-  const [datePicked, setDatePicked] = useState(new Date());
-
   return (
     <>
       {showModal ? (
         <div className={styles.back} onClick={closeModal} ref={backRef}>
           <animated.div style={animation}>
             <div className={styles.wrap}>
+              <div className={styles.profile_wrapper}>
+                <div className={styles.owner_wrapper}>
+                  <a href="#">
+                    <img
+                      className={styles.owner_img}
+                      src="/images/profileImg08.jpeg"
+                    />
+                  </a>
+
+                  <div className={styles.owner_name}>
+                    <h4>JK Min</h4>
+                  </div>
+                </div>
+              </div>
               <div className={styles.left}>
-                {/* <img
+                <img
                   className={styles.pic}
                   src="/images/image16.jpeg"
                   alt="image16"
-                ></img> */}
-                {/* <p className={styles.title}>Marilyn Monroe</p> */}
-                <p className={styles.price}>작업중</p>
+                ></img>
+                <p className={styles.title}>Marilyn Monroe</p>
+                <p className={styles.price}>
+                  <i class="uil uil-heart-alt"></i>
+                  <i class="uil uil-comment"></i>
+                </p>
               </div>
-              <div className={styles.right}>
-                {/* <button className={styles.btn_booking}>댓글작성</button> */}
-              </div>
+              <div className={styles.right}></div>
               <div
                 className={styles.close}
-                onClick={() => setShowModal(prev => !prev)}
+                onClick={() => setShowModal((prev) => !prev)}
               >
                 <i className="fas fa-times"></i>
               </div>

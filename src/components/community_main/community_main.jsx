@@ -10,7 +10,7 @@ const CommunityMain = ({ openModal, postsData }) => {
         {postsData.length > 0
           ? postsData.map((postData, idx) => (
               <>
-                <Fade top duration={1800} distance={"15px"}>
+                <Fade top duration={1800} distance={"15px"} key={idx}>
                   <CommunityPin
                     openModal={openModal}
                     postData={postData}
