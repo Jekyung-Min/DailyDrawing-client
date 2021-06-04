@@ -13,14 +13,14 @@ export const CommunityModal = ({ showModal, setShowModal }) => {
     transform: showModal ? `translateY(6%)` : `translateY(-100%)`,
   });
 
-  const closeModal = (e) => {
+  const closeModal = e => {
     if (backRef.current === e.target) {
       setShowModal(false);
     }
   };
 
   const keyPress = useCallback(
-    (e) => {
+    e => {
       if (showModal && e.key === "Escape") {
         setShowModal(false);
       }
@@ -42,20 +42,20 @@ export const CommunityModal = ({ showModal, setShowModal }) => {
           <animated.div style={animation}>
             <div className={styles.wrap}>
               <div className={styles.left}>
-                <img
+                {/* <img
                   className={styles.pic}
                   src="/images/image16.jpeg"
                   alt="image16"
-                ></img>
-                <p className={styles.title}>Marilyn Monroe</p>
-                <p className={styles.price}>화이팅</p>
+                ></img> */}
+                {/* <p className={styles.title}>Marilyn Monroe</p> */}
+                <p className={styles.price}>작업중</p>
               </div>
               <div className={styles.right}>
-                <button className={styles.btn_booking}>댓글작성</button>
+                {/* <button className={styles.btn_booking}>댓글작성</button> */}
               </div>
               <div
                 className={styles.close}
-                onClick={() => setShowModal((prev) => !prev)}
+                onClick={() => setShowModal(prev => !prev)}
               >
                 <i className="fas fa-times"></i>
               </div>
