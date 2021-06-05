@@ -9,7 +9,8 @@ const Button = ({
   onClick,
   buttonStyle,
   buttonSize,
-  hanldeSignOutBtn,
+  setShowSignModal,
+  onClickSignOut,
 }) => {
   const getButtonStyle = buttonStyle => {
     switch (buttonStyle) {
@@ -37,17 +38,21 @@ const Button = ({
   };
 
   return (
-    <Link to={path}>
-      <button
-        className={`${styles.btn} ${getButtonStyle(
-          buttonStyle
-        )} ${getButtonSize(buttonSize)}`}
-        onClick={hanldeSignOutBtn}
-        type={type}
-      >
-        {children}
-      </button>
-    </Link>
+    <button
+      className={`${styles.btn} ${getButtonStyle(buttonStyle)} ${getButtonSize(
+        buttonSize
+      )}`}
+      onClick={() => {
+        if (!onClickSignOut) {
+          setShowSignModal(pre => !pre);
+        } else {
+          onClickSignOut();
+        }
+      }}
+      type={type}
+    >
+      {children}
+    </button>
   );
 };
 

@@ -7,11 +7,11 @@ import styles from "./navbar.module.css";
 const Navbar = ({
   link,
   accessToken,
-  openNoAccessModal,
   aboutRef,
   partnersRef,
   courseRef,
   portfolioRef,
+  setShowSignModal,
 }) => {
   const history = useHistory();
   const [click, setClick] = useState(false);
@@ -166,52 +166,7 @@ const Navbar = ({
               </div>
             </li>
           )}
-          {/* {link === "listPage" ? (
-            <li className={styles.item}>
-              <div
-                className={styles.link}
-                onClick={() => {
-                  history.push({
-                    pathname: "/",
-                    state: {
-                      scroll: 4,
-                    },
-                  });
-                }}
-              >
-                Course
-              </div>
-            </li>
-          ) : (
-            <li className={styles.item}>
-              <div className={styles.link} onClick={scrollToCourse}>
-                Course
-              </div>
-            </li>
-          )}
-          {link === "listPage" ? (
-            <li className={styles.item}>
-              <div
-                className={styles.link}
-                onClick={() =>
-                  history.push({
-                    pathname: "/",
-                    state: {
-                      scroll: 5,
-                    },
-                  })
-                }
-              >
-                Portfolio
-              </div>
-            </li>
-          ) : (
-            <li className={styles.item}>
-              <div className={styles.link} onClick={scrollPortfolio}>
-                Portfolio
-              </div>
-            </li>
-          )} */}
+
           <li className={styles.item}>
             <Link
               to="/participate"
@@ -254,7 +209,7 @@ const Navbar = ({
             )
           : button && (
               <div className={styles.login}>
-                <Button buttonStyle="two" path="/">
+                <Button buttonStyle="two" setShowSignModal={setShowSignModal}>
                   Sign in
                 </Button>
               </div>
