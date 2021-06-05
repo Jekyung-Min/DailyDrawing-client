@@ -67,11 +67,14 @@
 }
 
 .button {
+  font-size: 1.1rem;
+  width: 88%;
+  justify-content: center;
   display: inline-block;
   background-color: var(--first-color);
   color: #fff;
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   font-weight: var(--font-medium);
 }
 
@@ -94,9 +97,30 @@
   }
 }
 
-@media screen and (min-width: 568px) {
+@media screen and (min-width: 576px) {
+  .button {
+    width: 75%;
+  }
 }
+
+@media screen and (min-width: 768px) {
+  .button {
+    width: 65%;
+  }
+  .share_img {
+    width: 350px;
+    height: 250px;
+  }
+}
+
 @media screen and (min-width: 870px) {
+  .button {
+    width: 100%;
+  }
+  .share_img {
+    width: 387px;
+    height: 250px;
+  }
   .container {
     margin-left: auto;
     margin-right: auto;
@@ -124,6 +148,9 @@
 }
 
 @media screen and (min-width: 1024px) {
+  .button {
+    width: 100%;
+  }
   .about_img {
     width: 430px;
     height: 290px;
