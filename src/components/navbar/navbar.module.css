@@ -58,6 +58,46 @@
   margin-right: 1.5rem;
 }
 
+.user {
+  display: flex;
+  margin-right: 1rem;
+  align-items: center;
+}
+
+.user_Img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0;
+}
+
+.user_nick {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-left: 0.8rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.btn_logout {
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border: solid #fff 2px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 1rem;
+  border-radius: 2rem;
+  color: #fff;
+  transition: all 0.3s ease-out;
+}
+
+.btn_logout:hover {
+  color: black;
+  background-color: #fff;
+}
+
 .fa_bars {
   color: #fff;
 }
@@ -70,7 +110,7 @@
   display: none;
 }
 
-@media screen and (max-width: 95rem) {
+@media screen and (max-width: 1623px) {
   /* @media screen and (max-width: 60rem) { */
   .menu {
     display: flex;
