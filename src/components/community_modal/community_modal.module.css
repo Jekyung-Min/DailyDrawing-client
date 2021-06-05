@@ -1,5 +1,6 @@
 .profile_wrapper {
-  margin: 15px 50px 0 50px;
+  width: 80%;
+  margin: 18px 50px 0 50px;
 }
 
 .owner_wrapper {
@@ -10,7 +11,7 @@
   /* border: 1.5px solid #e0e0e0; */
   background-color: var(--body-color);
   border-radius: 4px;
-  padding: 7px;
+  padding: 7px 10px 0px 10px;
   display: flex;
 }
 
@@ -50,6 +51,7 @@
 }
 
 .left {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,17 +60,45 @@
 
 .pic {
   width: 340px;
-  height: 400px;
+  height: 420px;
   border-radius: 10px;
 }
 
+/* .pic_wrapper {
+  width: 80%;
+  margin: 0 25px 0 25px;
+  padding: 20px;
+  border: 1.5px solid #e0e0e0;
+} */
+
 .title {
-  font-size: 1rem;
+  color: var(--title-color);
   margin-top: 1rem;
+  font-size: 1.3rem;
 }
 
-.price {
-  margin-top: 1rem;
+.likes {
+  margin-top: 0.3rem;
+  color: var(--title-color);
+}
+
+.icons {
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  margin-top: 0.2rem;
+}
+.heart_icon {
+  color: var(--title-color);
+  font-size: 2rem;
+  font-weight: 100;
+  cursor: pointer;
+}
+
+.comment_icon {
+  color: var(--title-color);
+  font-size: 2rem;
+  cursor: pointer;
 }
 .right {
   display: flex;
@@ -105,34 +135,167 @@
   font-size: 1.45rem;
   color: var(--first-color);
 }
-@media screen and (min-width: 640px) {
-  .pic {
-    width: 400px;
-    height: 500px;
+
+@media screen and (min-width: 200px) {
+  .wrap {
+    width: 320px;
+    height: 530px;
   }
-  .title {
-    font-size: 1.1rem;
+  .profile_wrapper {
+    width: 80%;
+    margin: 10px 0 0 5px;
+    padding: 7px 10px 0 10px;
   }
-  .datepick {
-    width: 350px;
-  }
-  .textarea {
-    width: 410px;
+  .owner_wrapper {
+    display: flex;
   }
 
-  .wrap {
-    width: 550px;
-    height: 700px;
+  .owner_img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--first-color-second);
+  }
+
+  .content_wrapper {
+    display: flex;
     flex-direction: column;
+    align-items: center;
+  }
+  .pic {
+    width: 280px;
+    height: 320px;
+  }
+
+  .title {
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .likes {
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
+  }
+  .icons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0rem;
+  }
+  .heart_icon {
+    font-size: 1.8rem;
+    font-weight: 100;
+    cursor: pointer;
+  }
+
+  .comment_icon {
+    font-size: 1.8rem;
+    cursor: pointer;
   }
 }
 
-/* @media screen and (min-width: 860px) {
+@media screen and (min-width: 503px) {
   .wrap {
+    width: 400px;
+    height: 600px;
+  }
+
+  .profile_wrapper {
+    width: 80%;
+    margin: 10px 0 0 5px;
+    padding: 7px 10px 0 10px;
+  }
+  .owner_wrapper {
+    display: flex;
+  }
+
+  .owner_img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--first-color-second);
+  }
+
+  .pic {
+    width: 350px;
+    height: 390px;
+  }
+
+  .title {
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .icons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0rem;
+  }
+  .heart_icon {
+    font-size: 1.8rem;
+    font-weight: 100;
+    cursor: pointer;
+  }
+
+  .comment_icon {
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+}
+@media screen and (min-width: 757px) {
+  .wrap {
+    width: 550px;
+    height: 660px;
+  }
+
+  .profile_wrapper {
+    width: 80%;
+    margin: 14px 50px 0 50px;
+    padding: 7px 10px 0 10px;
+  }
+  .owner_wrapper {
+    display: flex;
+  }
+
+  .owner_img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--first-color-second);
+  }
+
+  .pic {
+    width: 410px;
+    height: 450px;
+  }
+
+  .title {
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .icons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0rem;
+  }
+  .heart_icon {
+    font-size: 1.8rem;
+    font-weight: 100;
+    cursor: pointer;
+  }
+
+  .comment_icon {
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 860px) {
+  /* .wrap {
     width: 750px;
     height: 700px;
-  }
+  } */
 }
 
 @media screen and (min-width: 1441px) {
-} */
+}
