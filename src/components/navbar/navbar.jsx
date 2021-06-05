@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import Button from "../button/button";
 import { Link } from "react-router-dom";
 import styles from "./navbar.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { signOut } from "../../actions";
 
-const Navbar = ({
-  link,
-  accessToken,
-  aboutRef,
-  partnersRef,
-  courseRef,
-  portfolioRef,
-  setShowSignModal,
-}) => {
+const URL = process.env.REACT_APP_SERVER_URL;
+const Navbar = ({ link, aboutRef, partnersRef, setShowSignModal }) => {
+  const userInfo = useSelector(state => state.userReducer.user);
+  const dispatch = useDispatch();
   const history = useHistory();
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const [accessToken, setAccessToken] = useState(null);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+  useEffect(() => {
+    setAccessToken(userInfo.accessToken);
+  });
 
   const showButton = () => {
-    if (window.innerWidth <= 1520) {
+    if (window.innerWidth <= 1623) {
       // if (window.innerWidth <= 960) {
       setButton(false);
     } else {
@@ -29,6 +30,11 @@ const Navbar = ({
       setButton(true);
     }
   };
+
+  useEffect(() => {
+    showButton();
+    window.addEventListener("resize", showButton);
+  }, []);
 
   const scrollToStadium = () => {
     setClick(false);
@@ -54,28 +60,18 @@ const Navbar = ({
     });
   };
 
-  const scrollToCourse = () => {
-    setClick(false);
-    courseRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+  const handleBtnLogOut = async () => {
+    if (accessToken) {
+      try {
+        await axios.get(`${URL}/sign/out`, {
+          headers: { authorization: `Bearer ${accessToken}` },
+        });
+        dispatch(signOut());
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
-
-  const scrollPortfolio = () => {
-    setClick(false);
-    portfolioRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
-
-  useEffect(() => {
-    showButton();
-  }, []);
-
-  window.addEventListener("resize", showButton);
-
   return (
     <>
       <div className={styles.container}>
@@ -169,15 +165,6 @@ const Navbar = ({
 
           <li className={styles.item}>
             <Link
-              to="/participate"
-              className={styles.link}
-              onClick={closeMobileMenu}
-            >
-              Participate
-            </Link>
-          </li>
-          <li className={styles.item}>
-            <Link
               to="/community"
               className={styles.link}
               onClick={closeMobileMenu}
@@ -185,33 +172,62 @@ const Navbar = ({
               Community
             </Link>
           </li>
+          <li className={styles.item}>
+            <Link
+              to="/participate"
+              className={styles.link}
+              onClick={closeMobileMenu}
+            >
+              Participate
+            </Link>
+          </li>
           {accessToken ? (
             <li>
-              <Link to="/" className={styles.link_mobile}>
+              <button
+                to="/"
+                className={styles.link_mobile}
+                onClick={handleBtnLogOut}
+              >
                 Sign out
-              </Link>
+              </button>
             </li>
           ) : (
             <li>
-              <Link to="/" className={styles.link_mobile}>
+              <button
+                className={styles.link_mobile}
+                onClick={() => {
+                  setShowSignModal(true);
+                  closeMobileMenu();
+                }}
+              >
                 Sign in
-              </Link>
+              </button>
             </li>
           )}
         </ul>
         {accessToken
           ? button && (
-              <div className={styles.login}>
-                <Button buttonStyle="two" path="/">
-                  Sign out
-                </Button>
+              <div className={styles.user}>
+                <img
+                  src={`${URL}/profile/get/${userInfo.profileImg}`}
+                  className={styles.user_Img}
+                />
+                <span className={styles.user_nick}>{userInfo.nickname}</span>
+                <button className={styles.btn_logout} onClick={handleBtnLogOut}>
+                  Sign Out
+                </button>
               </div>
             )
           : button && (
               <div className={styles.login}>
-                <Button buttonStyle="two" setShowSignModal={setShowSignModal}>
-                  Sign in
-                </Button>
+                <button
+                  className={styles.btn_logout}
+                  onClick={() => {
+                    setShowSignModal(true);
+                  }}
+                >
+                  Sign In
+                </button>
               </div>
             )}
       </div>
