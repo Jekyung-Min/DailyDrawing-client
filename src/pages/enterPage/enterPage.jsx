@@ -9,13 +9,16 @@ import EnterFourth from "../../components/enter_fourth/enter_fourth";
 import EnterFifth from "../../components/enter_fifth/enter_fifth";
 import EnterSixth from "../../components/enter_sixth/enter_sixth";
 import { useLocation } from "react-router";
-const EnterPage = (props) => {
+import Sign_modal from "../../components/sign_modal/sign_modal";
+
+const EnterPage = props => {
   const [scrollPossible, setScrollPossible] = useState(false);
   // const location = useLocation();
   const aboutRef = useRef();
   const partnersRef = useRef();
   const courseRef = useRef();
   const portfolioRef = useRef();
+  const [showSignModal, setShowSignModal] = useState(false);
 
   const scrollToCourse = () => {
     courseRef.current.scrollIntoView({
@@ -36,11 +39,17 @@ const EnterPage = (props) => {
 
   return (
     <>
+      <Sign_modal
+        showSignModal={showSignModal}
+        setShowSignModal={setShowSignModal}
+      />
       <Navbar
         aboutRef={aboutRef}
         partnersRef={partnersRef}
         courseRef={courseRef}
         portfolioRef={portfolioRef}
+        showSignModal={showSignModal}
+        setShowSignModal={setShowSignModal}
       ></Navbar>
       <EnterFirst
         scrollToCourse={scrollToCourse}
