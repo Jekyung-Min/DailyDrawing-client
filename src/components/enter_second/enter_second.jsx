@@ -62,7 +62,7 @@ const EnterSecond = ({ aboutRef }) => {
                 href="/community"
                 className={`${styles.button} ${styles.button_flex}`}
               >
-                체험하기
+                둘러보기
               </a>
             </div>
           </div>

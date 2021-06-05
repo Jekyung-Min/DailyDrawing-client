@@ -25,12 +25,14 @@ const EnterFirst = ({ scrollToCourse, scrollPossible }) => {
               <p className={`${styles.description}`}>
                 DailyDrawing과 함께 꿈을 이루어 보세요.
               </p>
-              <a
-                href="/community"
-                className={`${styles.button} ${styles.button_flex}`}
-              >
-                체험하기
-              </a>
+              <div className={`${styles.button_wrapper} `}>
+                <a
+                  href="/community"
+                  className={`${styles.button} ${styles.button_flex}`}
+                >
+                  둘러보기
+                </a>
+              </div>
             </div>
           </Fade>
         </div>
@@ -47,8 +49,7 @@ const EnterFirst = ({ scrollToCourse, scrollPossible }) => {
               className={`${styles.scroll_button} ${styles.button_flex}`}
               onClick={scrollToCourse}
             >
-              <i class={`uil uil-mouse-alt ${styles.scroll_mouse}`}></i>
-              <span className={`${styles.scroll_name}`}>더보기</span>
+              <span className={`${styles.scroll_name}`}>대표작 보기</span>
               <i className={`uil uil-arrow-down ${styles.scroll_arrow}`}></i>
             </div>
           </div>

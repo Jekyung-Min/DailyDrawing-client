@@ -21,7 +21,7 @@ const EnterPage = props => {
   const [showSignModal, setShowSignModal] = useState(false);
 
   const scrollToCourse = () => {
-    courseRef.current.scrollIntoView({
+    portfolioRef.current.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });

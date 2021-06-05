@@ -208,7 +208,7 @@ const EnterSixth = ({ portfolioRef }) => {
 
                   <div className={`${styles.portfolio_data}`}>
                     <h3 className={`${styles.portfolio_title}`}>
-                      백현준 - Eyes of Truth
+                      이규진 - Eyes of Truth
                     </h3>
                     <p className={`${styles.portfolio_description}`}>
                       국립현대미술관 주관대회 혁신상

@@ -49,11 +49,15 @@
 }
 
 .button {
+  text-align: center;
+  font-size: 1.1rem;
+  width: 80%;
+  justify-content: center;
   display: inline-block;
   background-color: var(--first-color);
   color: #fff;
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   font-weight: var(--font-medium);
 }
 
@@ -107,6 +111,9 @@
   .noscroll {
     display: none;
   }
+  .button {
+    width: 80%;
+  }
 }
 
 @media screen and (min-width: 568px) {
@@ -126,9 +133,15 @@
   .noscroll {
     display: none;
   }
+  .button {
+    width: 95%;
+  }
 }
 
 @media screen and (min-width: 768px) {
+  .button {
+    width: 85%;
+  }
   .content {
     padding-top: 4.3rem;
     column-gap: 2rem;
@@ -148,6 +161,9 @@
   }
 }
 @media screen and (min-width: 968px) {
+  .button {
+    width: 90%;
+  }
   .container {
     margin-left: auto;
     margin-right: auto;
