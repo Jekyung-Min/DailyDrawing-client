@@ -1,21 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData, getAllPostInfo, getSearchResult } from "../../actions";
-import styles from "./communityPage.module.css";
-import { Link } from "react-router-dom";
 import CommunityHeader from "../../components/community_header/community_header";
 import CommunityMain from "../../components/community_main/community_main";
 import Navbar from "../../components/navbar/navbar";
 import Footer from "../../components/footer/footer";
 import { CommunityModal } from "../../components/community_modal/community_modal";
 import axios from "axios";
+import { CommunityComment } from "../../components/community_comment/community_comment";
 
 const URL = process.env.REACT_APP_SERVER_URL;
 const CommunityPage = () => {
-  const postsState = useSelector(state => state.postReducer);
-  const searchState = useSelector(state => state.searchReducer);
+  const postsState = useSelector((state) => state.postReducer);
+  const searchState = useSelector((state) => state.searchReducer);
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
+  const [showComment, setShowComment] = useState(false);
   const [postsData, setPostsData] = useState([]);
   const [modalInfo, setModalInfo] = useState(null);
   const [postUserInfo, setPostUserInfo] = useState(null);
@@ -34,10 +34,15 @@ const CommunityPage = () => {
   }, [length]);
 
   const openModal = () => {
-    setShowModal(prev => !prev);
+    setShowModal((prev) => !prev);
   };
 
-  const onSearchSubmit = async words => {
+  const openComment = () => {
+    setShowComment((prev) => !prev);
+    console.log(1);
+  };
+
+  const onSearchSubmit = async (words) => {
     if (words === "") {
       setPostsData(postsState.allPostsInfo);
     } else if (words !== null || words !== "") {
@@ -51,7 +56,7 @@ const CommunityPage = () => {
     }
   };
 
-  const getModalInfo = async modalInfo => {
+  const getModalInfo = async (modalInfo) => {
     setModalInfo(modalInfo);
     try {
       const comments = await axios.get(`${URL}/comments/${modalInfo.id}`);
@@ -74,7 +79,12 @@ const CommunityPage = () => {
         postUserInfo={postUserInfo}
         likeCountNum={likeCountNum}
         setShowModal={setShowModal}
+        openComment={openComment}
       ></CommunityModal>
+      <CommunityComment
+        showComment={showComment}
+        setShowComment={setShowComment}
+      ></CommunityComment>
       <Navbar link="listPage"></Navbar>
       <CommunityHeader onSubmit={onSearchSubmit} />
       <CommunityMain
