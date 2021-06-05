@@ -93,6 +93,14 @@
   outline: none;
 }
 
+@media screen and (min-width: 315px) {
+  .portfolio_title {
+    font-size: var(--normal-font-size);
+  }
+  .portfolio_description {
+    font-size: var(--normal-font-size);
+  }
+}
 @media screen and (min-width: 568px) {
   .portfolio_content {
     grid-template-columns: repeat(2, 1fr);
