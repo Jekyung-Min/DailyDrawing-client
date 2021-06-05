@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./enter_second.module.css";
 import Fade from "react-reveal/Fade";
+import CountUp from "react-countup";
 
 const EnterSecond = ({ aboutRef }) => {
   return (
@@ -21,21 +22,34 @@ const EnterSecond = ({ aboutRef }) => {
         <Fade right duration={1400} distance={"30px"}>
           <div className={`${styles.about_data}`}>
             <p className={`${styles.about_description}`}>
-              약 7년간 220,000명이 참여해주셨습니다.
+              약 7년간{" "}
+              <CountUp end={220000} separator={","} duration={4}></CountUp>
+              명이 참여해주셨습니다.
               <br />
               <br />
-              지금까지 누적 2,000,000개의 완성작을 남겨주셨으며
+              지금까지 누적{" "}
+              <CountUp end={2000000} separator={","} duration={4}></CountUp>
+              개의 완성작을 남겨주셨으며
               <br />
               <br />
               DailyDrawing의 파트너사는 홍익대학교를 포함하여
               <br />
               <br />
-              500군데를 돌파하였습니다.
+              <CountUp end={500} separator={","} duration={4}></CountUp>
+              군데를 돌파하였습니다.
             </p>
 
             <div className={`${styles.about_info}`}>
               <div>
-                <span className={`${styles.about_info_title}`}>07+</span>
+                <span className={`${styles.about_info_title}`}>
+                  <CountUp
+                    end={7}
+                    prefix={"0"}
+                    suffix={"+"}
+                    separator={","}
+                    duration={4}
+                  ></CountUp>
+                </span>
                 <span className={`${styles.about_info_name}`}>
                   운영
                   <br /> 총기간
@@ -43,14 +57,29 @@ const EnterSecond = ({ aboutRef }) => {
               </div>
 
               <div>
-                <span className={`${styles.about_info_title}`}>2,000,000+</span>
+                <span className={`${styles.about_info_title}`}>
+                  {" "}
+                  <CountUp
+                    suffix={"+"}
+                    end={2000000}
+                    separator={","}
+                    duration={4}
+                  ></CountUp>
+                </span>
                 <span className={`${styles.about_info_name}`}>
                   누적 <br /> 완성작
                 </span>
               </div>
 
               <div>
-                <span className={`${styles.about_info_title}`}>500+</span>
+                <span className={`${styles.about_info_title}`}>
+                  <CountUp
+                    suffix={"+"}
+                    end={500}
+                    separator={","}
+                    duration={4}
+                  ></CountUp>
+                </span>
                 <span className={`${styles.about_info_name}`}>
                   협력 <br /> 파트너사
                 </span>

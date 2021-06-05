@@ -1,7 +1,9 @@
 import React, { useRef, useEffect, useCallback, useState } from "react";
 import { useSpring, animated } from "react-spring";
 import styles from "./community_modal.module.css";
+import Fade from "react-reveal/Fade";
 
+const URL = process.env.REACT_APP_SERVER_URL;
 export const CommunityModal = ({
   showModal,
   setShowModal,
@@ -9,12 +11,13 @@ export const CommunityModal = ({
   postComments,
   postUserInfo,
   likeCountNum,
+  openComment,
 }) => {
   const backRef = useRef();
-  console.log(postComments);
-  console.log(modalInfo);
-  console.log(postUserInfo);
-  console.log(likeCountNum);
+  console.log("postComments는 ", postComments);
+  console.log("modalInfo는 ", modalInfo);
+  console.log("postUserInfo는 ", postUserInfo);
+  console.log("likeCountNum는 ", likeCountNum);
   const animation = useSpring({
     config: {
       duration: 300,
@@ -45,46 +48,58 @@ export const CommunityModal = ({
 
   return (
     <>
-      {showModal ? (
+      {showModal && postUserInfo ? (
         <div className={styles.back} onClick={closeModal} ref={backRef}>
           <animated.div style={animation}>
-            <div className={styles.wrap}>
-              <div className={styles.profile_wrapper}>
-                <div className={styles.owner_wrapper}>
-                  <img
-                    className={styles.owner_img}
-                    src="/images/profileImg08.jpeg"
-                  />
-                  <div className={styles.owner_name}>
-                    <h4>JK Min</h4>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.left}>
-                <div className={styles.pic_wrapper}>
-                  <img
-                    className={styles.pic}
-                    src="/images/image34.jpg"
-                    alt="image16"
-                  ></img>
-                </div>
-                <div className={styles.content_wrapper}>
-                  <p className={styles.title}>Marilyn Monroe</p>
-                  <p className={styles.likes}>좋아요 0개</p>
-                  <div className={styles.icons}>
-                    <i className={`uil uil-heart-alt ${styles.heart_icon}`}></i>
-                    <i className={`uil uil-comment ${styles.comment_icon}`}></i>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.right}></div>
-              <div
-                className={styles.close}
-                onClick={() => setShowModal((prev) => !prev)}
-              >
-                <i className="fas fa-times"></i>
-              </div>
+            <div
+              className={styles.close}
+              onClick={() => setShowModal((prev) => !prev)}
+            >
+              <i className="fas fa-times"></i>
             </div>
+            <Fade top cascade duration={1800} distance={"15px"}>
+              <div className={styles.wrap}>
+                {/* <Fade top duration={1800} distance={"15px"}> */}
+                <div className={styles.profile_wrapper}>
+                  <div className={styles.owner_wrapper}>
+                    <img
+                      className={styles.owner_img}
+                      src={`${URL}/profile/get/${postUserInfo.profileImg}`}
+                    />
+                    <div className={styles.owner_name}>
+                      <h4>{postUserInfo.nickname}</h4>
+                    </div>
+                  </div>
+                </div>
+                {/* </Fade> */}
+                <div className={styles.left}>
+                  {/* <Fade top duration={1800} distance={"15px"}> */}
+                  <div className={styles.pic_wrapper}>
+                    <img
+                      className={styles.pic}
+                      src={`${URL}/image/get/${modalInfo.DrawingImg}`}
+                      alt={modalInfo.DrawingImg}
+                    ></img>
+                  </div>
+                  {/* </Fade> */}
+                  {/* <Fade top duration={1800} distance={"15px"}> */}
+                  <div className={styles.content_wrapper}>
+                    <p className={styles.title}>{modalInfo.title}</p>
+                    <p className={styles.likes}>좋아요 {likeCountNum}개</p>
+                    <div className={styles.icons}>
+                      <i className={`fas fa-heart ${styles.heart_icon}`}></i>
+                      <i
+                        className={`far fa-comment ${styles.comment_icon}`}
+                        onClick={openComment}
+                      ></i>
+                    </div>
+                  </div>
+                  {/* </Fade> */}
+                </div>
+
+                <div className={styles.right}></div>
+              </div>
+            </Fade>
           </animated.div>
         </div>
       ) : null}

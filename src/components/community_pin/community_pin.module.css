@@ -10,6 +10,11 @@
   width: 236px;
 }
 
+.container:hover {
+  opacity: 0.8;
+  transition: all 0.15s linear;
+}
+
 .container > img {
   width: 100%;
   height: 100%;

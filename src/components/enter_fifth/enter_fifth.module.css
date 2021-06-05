@@ -80,7 +80,7 @@
   width: 13px;
   height: 13px;
   background-color: var(--first-color);
-  border-radius: 50%;
+  /* border-radius: 50%; */
 }
 
 .qualification_line {
