@@ -11,14 +11,13 @@ import EnterSixth from "../../components/enter_sixth/enter_sixth";
 import { useLocation } from "react-router";
 import Sign_modal from "../../components/sign_modal/sign_modal";
 
-const EnterPage = props => {
+const EnterPage = ({ showSignModal, setShowSignModal }) => {
   const [scrollPossible, setScrollPossible] = useState(false);
   // const location = useLocation();
   const aboutRef = useRef();
   const partnersRef = useRef();
   const courseRef = useRef();
   const portfolioRef = useRef();
-  const [showSignModal, setShowSignModal] = useState(false);
 
   const scrollToCourse = () => {
     portfolioRef.current.scrollIntoView({

@@ -9,9 +9,10 @@ import Navbar from "../../components/navbar/navbar";
 import Footer from "../../components/footer/footer";
 import { CommunityModal } from "../../components/community_modal/community_modal";
 import axios from "axios";
+import Sign_modal from "../../components/sign_modal/sign_modal";
 
 const URL = process.env.REACT_APP_SERVER_URL;
-const CommunityPage = () => {
+const CommunityPage = ({ showSignModal, setShowSignModal }) => {
   const postsState = useSelector(state => state.postReducer);
   const searchState = useSelector(state => state.searchReducer);
   const dispatch = useDispatch();
@@ -67,6 +68,10 @@ const CommunityPage = () => {
 
   return (
     <>
+      <Sign_modal
+        showSignModal={showSignModal}
+        setShowSignModal={setShowSignModal}
+      />
       <CommunityModal
         modalInfo={modalInfo}
         showModal={showModal}
@@ -75,7 +80,7 @@ const CommunityPage = () => {
         likeCountNum={likeCountNum}
         setShowModal={setShowModal}
       ></CommunityModal>
-      <Navbar link="listPage"></Navbar>
+      <Navbar link="listPage" setShowSignModal={setShowSignModal}></Navbar>
       <CommunityHeader onSubmit={onSearchSubmit} />
       <CommunityMain
         openModal={openModal}
