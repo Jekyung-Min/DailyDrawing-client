@@ -18,12 +18,14 @@ const EnterThird = (props) => {
               인터뷰를 받을 수 있는 기회가 주어집니다. 수료 후에도 커뮤니티에
               참여하며 동료들과 정보를 공유하세요! DailyDrawing이 함께합니다.
             </p>
-            <a
-              href="/community"
-              className={`${styles.button} ${styles.button_flex}`}
-            >
-              체험하기
-            </a>
+            <div className={`${styles.button_wrapper} `}>
+              <a
+                href="/community"
+                className={`${styles.button} ${styles.button_flex}`}
+              >
+                둘러보기
+              </a>
+            </div>
           </div>
         </Fade>
         <Fade left duration={1800} delay={200} distance={"30px"}>
