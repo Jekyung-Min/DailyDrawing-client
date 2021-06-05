@@ -193,9 +193,15 @@ const Navbar = ({
             </li>
           ) : (
             <li>
-              <Link to="/" className={styles.link_mobile}>
+              <button
+                className={styles.link_mobile}
+                onClick={() => {
+                  setShowSignModal(true);
+                  closeMobileMenu();
+                }}
+              >
                 Sign in
-              </Link>
+              </button>
             </li>
           )}
         </ul>
