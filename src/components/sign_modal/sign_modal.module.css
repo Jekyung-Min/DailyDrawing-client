@@ -118,3 +118,10 @@ button {
 .btn_signUp:hover {
   text-shadow: 0 3px 5px rgba(0, 0, 0, 0.6);
 }
+
+.errMsg {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: crimson;
+}
