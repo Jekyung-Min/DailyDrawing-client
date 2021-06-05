@@ -17,6 +17,10 @@ const CommunityPage = () => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [postsData, setPostsData] = useState([]);
+  const [modalInfo, setModalInfo] = useState(null);
+  const [postUserInfo, setPostUserInfo] = useState(null);
+  const [likeCountNum, setLikeCountNum] = useState(null);
+  const [postComments, setPostComments] = useState([]);
   const length = postsState.allPostsInfo.length;
 
   useEffect(() => {
@@ -47,15 +51,37 @@ const CommunityPage = () => {
     }
   };
 
+  const getModalInfo = async modalInfo => {
+    setModalInfo(modalInfo);
+    try {
+      const comments = await axios.get(`${URL}/comments/${modalInfo.id}`);
+      setPostComments(comments.data.comments);
+      const userInfo = await axios.get(`${URL}/user/${modalInfo.Users_id}`);
+      setPostUserInfo(userInfo.data.userInfo);
+      const likeNum = await axios.get(`${URL}/like/count/${modalInfo.id}`);
+      setLikeCountNum(likeNum.data.likeCountNumber);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <CommunityModal
+        modalInfo={modalInfo}
         showModal={showModal}
+        postComments={postComments}
+        postUserInfo={postUserInfo}
+        likeCountNum={likeCountNum}
         setShowModal={setShowModal}
       ></CommunityModal>
       <Navbar link="listPage"></Navbar>
       <CommunityHeader onSubmit={onSearchSubmit} />
-      <CommunityMain openModal={openModal} postsData={postsData} />
+      <CommunityMain
+        openModal={openModal}
+        postsData={postsData}
+        getModalInfo={getModalInfo}
+      />
       <Footer></Footer>
     </>
   );
