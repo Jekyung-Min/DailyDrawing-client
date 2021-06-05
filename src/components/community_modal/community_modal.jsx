@@ -2,9 +2,19 @@ import React, { useRef, useEffect, useCallback, useState } from "react";
 import { useSpring, animated } from "react-spring";
 import styles from "./community_modal.module.css";
 
-export const CommunityModal = ({ showModal, setShowModal }) => {
+export const CommunityModal = ({
+  showModal,
+  setShowModal,
+  modalInfo,
+  postComments,
+  postUserInfo,
+  likeCountNum,
+}) => {
   const backRef = useRef();
-
+  console.log(postComments);
+  console.log(modalInfo);
+  console.log(postUserInfo);
+  console.log(likeCountNum);
   const animation = useSpring({
     config: {
       duration: 300,
