@@ -26,7 +26,7 @@
 .qualification_tabs {
   display: flex;
   justify-content: space-evenly;
-  margin-bottom: var(--mb-2);
+  margin-bottom: var(--mb-3);
 }
 
 .qualification_button {
@@ -49,7 +49,7 @@
 }
 
 .qualification_icon {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-right: var(--mb-0-5);
 }
 
