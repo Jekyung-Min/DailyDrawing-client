@@ -18,7 +18,7 @@ const EnterPage = (props) => {
   const portfolioRef = useRef();
 
   const scrollToCourse = () => {
-    courseRef.current.scrollIntoView({
+    portfolioRef.current.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
