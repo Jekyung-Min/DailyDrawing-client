@@ -14,7 +14,7 @@ const Sign_modal = ({ showSignModal, setShowSignModal }) => {
   const [message, setMessage] = useState("");
   const dispatch = useDispatch();
 
-  const closeModal = e => {
+  const closeModal = (e) => {
     if (backRef.current === e.target) {
       setShowSignModal(false);
     }
@@ -29,11 +29,11 @@ const Sign_modal = ({ showSignModal, setShowSignModal }) => {
   });
 
   const showSignup = () => {
-    setShowSignUpModal(pre => !pre);
+    setShowSignUpModal((pre) => !pre);
   };
 
-  const handleTypeInfo = key => event => {
-    setTypeInfo(preState => ({ ...preState, [key]: event.target.value }));
+  const handleTypeInfo = (key) => (event) => {
+    setTypeInfo((preState) => ({ ...preState, [key]: event.target.value }));
   };
 
   const validCheck = () => {
@@ -76,12 +76,12 @@ const Sign_modal = ({ showSignModal, setShowSignModal }) => {
               <div
                 className={styles.close}
                 onClick={() => {
-                  setShowSignModal(pre => !pre);
+                  setShowSignModal((pre) => !pre);
                 }}
               >
                 <i className="fas fa-times"></i>
               </div>
-              <div className={styles.title}>Sign In</div>
+              <h1 className={styles.title}>Sign In</h1>
               <div className={styles.user}>
                 <i className="fas fa-user"></i>
                 <input
