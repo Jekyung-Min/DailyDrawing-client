@@ -1,6 +1,8 @@
+import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./signup_modal.module.css";
 
+const URL = process.env.REACT_APP_SERVER_URL;
 const Signup_modal = ({ showSignUpModal, setShowSignUpModal }) => {
   const backRef = useRef();
   const [message, setMessage] = useState("");
@@ -34,12 +36,27 @@ const Signup_modal = ({ showSignUpModal, setShowSignUpModal }) => {
     return true;
   };
 
-  const submitUserInfo = () => {
+  const submitUserInfo = async () => {
     const isTrue = validCheck();
     if (isTrue) {
       setMessage("");
-      console.log("서버요청");
-      setShowSignUpModal(false);
+      try {
+        const { email, nickname, password } = userInfo;
+        await axios.post(`${URL}/sign/up`, {
+          email,
+          nickname,
+          password,
+          profileImg: "profileImg00.png",
+        });
+        setShowSignUpModal(false);
+      } catch (err) {
+        const msg = err.response.data.message;
+        if (msg === "NickName already exists") {
+          setMessage("이미 존재하는 닉네임입니다.");
+        } else if (msg === "Email already exists") {
+          setMessage("이미 존재하는 이메일입니다.");
+        }
+      }
     }
   };
 
