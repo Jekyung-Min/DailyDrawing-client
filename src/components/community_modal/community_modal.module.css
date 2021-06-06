@@ -1,38 +1,7 @@
-.profile_wrapper {
-  width: 80%;
-  margin: 18px 50px 0 50px;
-}
-
-.owner_wrapper {
-  display: flex;
-}
-
-.profile_wrapper {
-  /* border: 1.5px solid #e0e0e0; */
-  background-color: var(--body-color);
-  border-radius: 4px;
-  padding: 7px 10px 0px 10px;
-  display: flex;
-}
-
-.owner_img {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  border: 2px solid var(--first-color-second);
-  margin-left: 10px;
-  margin-right: 18px;
-}
-
-.owner_name {
-  display: flex;
-  align-items: center;
-}
-
 .back {
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.4);
   position: fixed;
   display: flex;
   justify-content: center;
@@ -40,252 +9,89 @@
   align-items: center;
 }
 
-.wrap {
+.container {
   display: flex;
-  flex-direction: column;
-  width: 450px;
-  /* height: 640px; */
-  background-color: var(--body-color);
-  color: #000;
-  border-radius: 10px;
+  width: 800px;
+  background-color: #f2f2f2;
+  border-radius: 1rem;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.6);
 }
 
-.left {
-  width: 100%;
+.post {
+  margin: 1rem;
+}
+
+/* post 유저정보 */
+.post_userInfo {
   display: flex;
-  flex-direction: column;
+  margin-bottom: 1rem;
   align-items: center;
-  margin-top: 1rem;
 }
 
-.pic {
-  width: 340px;
-  /* height: 420px; */
-  border-radius: 10px;
+.userInfo_img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0;
+}
+.userInfo_nickname {
+  margin-left: 1rem;
 }
 
-/* .pic_wrapper {
-  width: 80%;
-  margin: 0 25px 0 25px;
-  padding: 20px;
-  border: 1.5px solid #e0e0e0;
-} */
+/* post 게시물 css */
 
-.content_wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: var(--mb-1-5);
-  margin-top: 0.2rem;
+.post_title {
+  font-size: 1rem;
+  font-weight: 550;
+  text-align: center;
+  margin-bottom: 0.5rem;
 }
-
-.title {
-  color: var(--title-color);
-  font-size: 1.3rem;
+.postImg {
+  width: 400px;
 }
-
-.likes {
-  margin-top: 0.3rem;
-  color: var(--title-color);
-}
-
+/* post 좋아요, 댓글 아이콘 css */
 .icons {
   display: flex;
-  justify-content: space-around;
-  width: 100px;
-  margin-top: 1rem;
-}
-.heart_icon {
-  color: var(--title-color);
+  justify-content: center;
+  align-items: center;
   font-size: 2rem;
+  margin: 1rem 0;
+}
+.icon_like {
+  color: crimson;
   cursor: pointer;
+}
+.icon_reply {
+  cursor: pointer;
+}
+.likeCount {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+  margin-right: 3rem;
 }
 
-.comment_icon {
-  color: var(--title-color);
-  font-size: 1.8rem;
-  cursor: pointer;
-}
-.right {
+/* 댓글창 css  */
+.comments {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  margin: 2rem 1rem 2.5rem 2rem;
+  transition: all 1s ease-out;
+}
+.comment {
+  margin-bottom: 0.3rem;
+}
+.comment_colon {
+  margin-left: 0.2rem;
+  margin-right: 0.5rem;
 }
 
-.close {
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(-120%, 40%);
-  padding: 0;
-  font-size: 1.45rem;
-  color: var(--first-color);
+/* reply toggle 후 */
+.container.active {
+  width: 500px;
+  justify-content: center;
 }
-
-@media screen and (min-width: 200px) {
-  .wrap {
-    width: 320px;
-    height: auto;
-    max-height: 530px;
-  }
-  .profile_wrapper {
-    width: 80%;
-    margin: 10px 0 0 5px;
-    padding: 7px 10px 0 10px;
-  }
-  .owner_wrapper {
-    display: flex;
-  }
-
-  .owner_img {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 2px solid var(--first-color-second);
-  }
-
-  .pic {
-    width: 280px;
-    height: auto;
-    max-height: 320px;
-  }
-
-  .title {
-    margin-top: 0.5rem;
-    font-size: 1.1rem;
-  }
-
-  .likes {
-    margin-top: 0.3rem;
-    font-size: 0.8rem;
-  }
-  .icons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 1rem;
-  }
-  .heart_icon {
-    font-size: 1.8rem;
-    cursor: pointer;
-  }
-
-  .comment_icon {
-    font-size: 1.8rem;
-    cursor: pointer;
-  }
-}
-
-@media screen and (min-width: 503px) {
-  .wrap {
-    width: 400px;
-    height: auto;
-    max-height: 600px;
-    /* height: 600px; */
-  }
-
-  .profile_wrapper {
-    width: 80%;
-    margin: 10px 0 0 5px;
-    padding: 7px 10px 0 10px;
-  }
-  .owner_wrapper {
-    display: flex;
-  }
-
-  .owner_img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 2px solid var(--first-color-second);
-  }
-
-  .pic {
-    width: 350px;
-    height: auto;
-    max-height: 390px;
-  }
-
-  .title {
-    margin-top: 0.5rem;
-    font-size: 1.1rem;
-  }
-
-  .icons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 1rem;
-  }
-  .heart_icon {
-    font-size: 1.8rem;
-    cursor: pointer;
-  }
-
-  .comment_icon {
-    font-size: 1.8rem;
-    cursor: pointer;
-  }
-}
-@media screen and (min-width: 757px) {
-  .wrap {
-    width: 550px;
-    height: auto;
-    max-height: 670px;
-  }
-
-  .profile_wrapper {
-    width: 80%;
-    margin: 14px 50px 0 50px;
-    padding: 7px 10px 0 10px;
-  }
-  .owner_wrapper {
-    display: flex;
-  }
-
-  .owner_img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 2px solid var(--first-color-second);
-  }
-
-  .pic {
-    width: 410px;
-    height: auto;
-    max-height: 450px;
-  }
-
-  .content_wrapper {
-    margin-top: 0.2rem;
-    margin-bottom: var(--mb-1-25);
-  }
-
-  .title {
-    font-size: 1.1rem;
-  }
-
-  .icons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 1rem;
-    margin-bottom: var(--mb-1);
-  }
-  .heart_icon {
-    cursor: pointer;
-  }
-
-  .comment_icon {
-    font-size: 1.8rem;
-    cursor: pointer;
-  }
-}
-
-@media screen and (min-width: 860px) {
-  /* .wrap {
-    width: 750px;
-    height: 700px;
-  } */
-}
-
-@media screen and (min-width: 1441px) {
+.comments.active {
+  display: none;
 }

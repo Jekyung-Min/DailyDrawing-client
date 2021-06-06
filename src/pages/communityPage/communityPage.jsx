@@ -12,8 +12,8 @@ import Sign_modal from "../../components/sign_modal/sign_modal";
 
 const URL = process.env.REACT_APP_SERVER_URL;
 const CommunityPage = ({ showSignModal, setShowSignModal }) => {
-  const postsState = useSelector((state) => state.postReducer);
-  const searchState = useSelector((state) => state.searchReducer);
+  const postsState = useSelector(state => state.postReducer);
+  const searchState = useSelector(state => state.searchReducer);
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [showComment, setShowComment] = useState(false);
@@ -35,15 +35,15 @@ const CommunityPage = ({ showSignModal, setShowSignModal }) => {
   }, [length]);
 
   const openModal = () => {
-    setShowModal((prev) => !prev);
+    setShowModal(prev => !prev);
   };
 
   const openComment = () => {
-    setShowComment((prev) => !prev);
+    setShowComment(prev => !prev);
     console.log(1);
   };
 
-  const onSearchSubmit = async (words) => {
+  const onSearchSubmit = async words => {
     if (words === "") {
       setPostsData(postsState.allPostsInfo);
     } else if (words !== null || words !== "") {
@@ -57,11 +57,31 @@ const CommunityPage = ({ showSignModal, setShowSignModal }) => {
     }
   };
 
-  const getModalInfo = async (modalInfo) => {
-    setModalInfo(modalInfo);
+  const getPostComment = async modalInfo => {
     try {
       const comments = await axios.get(`${URL}/comments/${modalInfo.id}`);
-      setPostComments(comments.data.comments);
+      const commentsData = [];
+      if (comments.data.comments) {
+        comments.data.comments.forEach(async (comment, idx) => {
+          const { data } = await axios.get(`${URL}/user/${comment.Users_id}`);
+          commentsData.push({
+            nickname: data.userInfo.nickname,
+            comment: comment.comment,
+          });
+          if (comments.data.comments.length - 1 === idx) {
+            setPostComments(commentsData);
+          }
+          return;
+        });
+      }
+    } catch (err) {
+      setPostComments([]);
+    }
+  };
+  const getModalInfo = async modalInfo => {
+    setModalInfo(modalInfo);
+    try {
+      // setPostComments(comments.data.comments);
       const userInfo = await axios.get(`${URL}/user/${modalInfo.Users_id}`);
       setPostUserInfo(userInfo.data.userInfo);
       const likeNum = await axios.get(`${URL}/like/count/${modalInfo.id}`);
@@ -69,6 +89,7 @@ const CommunityPage = ({ showSignModal, setShowSignModal }) => {
     } catch (err) {
       console.log(err);
     }
+    getPostComment(modalInfo);
   };
 
   return (
