@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./signup_modal.module.css";
+import Fade from "react-reveal/Fade";
 
 const Signup_modal = ({ showSignUpModal, setShowSignUpModal }) => {
   const backRef = useRef();
@@ -11,19 +12,19 @@ const Signup_modal = ({ showSignUpModal, setShowSignUpModal }) => {
     repassword: "",
   });
 
-  const closeModal = e => {
+  const closeModal = (e) => {
     if (backRef.current === e.target) {
       setShowSignUpModal(false);
     }
   };
 
-  const handleUserInfo = key => event => {
-    setUserInfo(preState => ({ ...preState, [key]: event.target.value }));
+  const handleUserInfo = (key) => (event) => {
+    setUserInfo((preState) => ({ ...preState, [key]: event.target.value }));
   };
 
   const validCheck = () => {
     const { email, password, repassword } = userInfo;
-    const isFill = Object.keys(userInfo).every(key => userInfo[key] !== "");
+    const isFill = Object.keys(userInfo).every((key) => userInfo[key] !== "");
     if (!isFill) {
       return setMessage("모든 정보를 입력해주세요.");
     } else if (email.includes("@") === false) {
@@ -51,12 +52,12 @@ const Signup_modal = ({ showSignUpModal, setShowSignUpModal }) => {
             <div
               className={styles.close}
               onClick={() => {
-                setShowSignUpModal(pre => !pre);
+                setShowSignUpModal((pre) => !pre);
               }}
             >
               <i className="fas fa-times"></i>
             </div>
-            <div className={styles.title}>Sign Up</div>
+            <h4 className={styles.title}>Sign Up</h4>
             <div className={styles.user}>
               <i className="fas fa-user"></i>
               <input

@@ -40,6 +40,7 @@
 
 .accessory_content:hover {
   box-shadow: 0 3px 12px rgba(65, 11, 16, 0.15);
+  cursor: pointer;
 }
 
 .accessory_img {

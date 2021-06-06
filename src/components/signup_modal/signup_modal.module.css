@@ -35,6 +35,7 @@ button {
   color: red;
 }
 .title {
+  color: black;
   font-size: 1.5rem;
   text-align: center;
   margin-top: 1rem;
@@ -43,6 +44,7 @@ button {
 .user {
   display: flex;
   position: relative;
+  color: hsl(var(--hue-color), 8%, 45%);
   margin-bottom: 1rem;
 }
 
@@ -78,7 +80,7 @@ button {
   font-weight: 600;
   border-radius: 0.5rem;
   color: #fff;
-  background-color: black;
+  background-color: var(--first-color);
   transition: all 0.3s ease-out;
   margin-top: 1.5rem;
 }
