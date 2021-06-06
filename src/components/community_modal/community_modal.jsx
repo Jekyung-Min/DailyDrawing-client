@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useCallback, useState } from "react";
 import { useSpring, animated } from "react-spring";
 import styles from "./community_modal.module.css";
 import Fade from "react-reveal/Fade";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const URL = process.env.REACT_APP_SERVER_URL;
 export const CommunityModal = ({
@@ -11,8 +13,11 @@ export const CommunityModal = ({
   postComments,
   postUserInfo,
   likeCountNum,
-  openComment,
 }) => {
+  const userInfo = useSelector(state => state.userReducer.user);
+  const { accessToken } = userInfo;
+  const [toggleReply, setToggleReply] = useState(true);
+  const [toggleLike, setToggleLike] = useState(false);
   const backRef = useRef();
   console.log("postComments는 ", postComments);
   console.log("modalInfo는 ", modalInfo);
@@ -26,14 +31,19 @@ export const CommunityModal = ({
     transform: showModal ? `translateY(6%)` : `translateY(-100%)`,
   });
 
-  const closeModal = (e) => {
+  const closeModal = e => {
     if (backRef.current === e.target) {
       setShowModal(false);
     }
   };
-
+  const handleToggleReply = () => {
+    setToggleReply(pre => !pre);
+  };
+  const handleToggleLike = () => {
+    setToggleLike(pre => !pre);
+  };
   const keyPress = useCallback(
-    (e) => {
+    e => {
       if (showModal && e.key === "Escape") {
         setShowModal(false);
       }
@@ -50,57 +60,88 @@ export const CommunityModal = ({
     <>
       {showModal && postUserInfo ? (
         <div className={styles.back} onClick={closeModal} ref={backRef}>
-          <animated.div style={animation}>
-            <div
-              className={styles.close}
-              onClick={() => setShowModal((prev) => !prev)}
-            >
-              <i className="fas fa-times"></i>
-            </div>
-            <Fade top cascade duration={1800} distance={"15px"}>
-              <div className={styles.wrap}>
-                {/* <Fade top duration={1800} distance={"15px"}> */}
-                <div className={styles.profile_wrapper}>
-                  <div className={styles.owner_wrapper}>
-                    <img
-                      className={styles.owner_img}
-                      src={`${URL}/profile/get/${postUserInfo.profileImg}`}
-                    />
-                    <div className={styles.owner_name}>
-                      <h4>{postUserInfo.nickname}</h4>
-                    </div>
-                  </div>
-                </div>
-                {/* </Fade> */}
-                <div className={styles.left}>
-                  {/* <Fade top duration={1800} distance={"15px"}> */}
-                  <div className={styles.pic_wrapper}>
-                    <img
-                      className={styles.pic}
-                      src={`${URL}/image/get/${modalInfo.DrawingImg}`}
-                      alt={modalInfo.DrawingImg}
-                    ></img>
-                  </div>
-                  {/* </Fade> */}
-                  {/* <Fade top duration={1800} distance={"15px"}> */}
-                  <div className={styles.content_wrapper}>
-                    <p className={styles.title}>{modalInfo.title}</p>
-                    <p className={styles.likes}>좋아요 {likeCountNum}개</p>
-                    <div className={styles.icons}>
-                      <i className={`fas fa-heart ${styles.heart_icon}`}></i>
-                      <i
-                        className={`far fa-comment ${styles.comment_icon}`}
-                        onClick={openComment}
-                      ></i>
-                    </div>
-                  </div>
-                  {/* </Fade> */}
-                </div>
-
-                <div className={styles.right}></div>
+          <div
+            className={
+              toggleReply
+                ? `${styles.container}`
+                : `${styles.container} ${styles.active}`
+            }
+          >
+            <div className={styles.post}>
+              <div className={styles.post_userInfo}>
+                <img
+                  className={styles.userInfo_img}
+                  src={`${URL}/profile/get/${postUserInfo.profileImg}`}
+                />
+                <span className={styles.userInfo_nickname}>
+                  {postUserInfo.nickname}
+                </span>
               </div>
-            </Fade>
-          </animated.div>
+              <div className={styles.post_postInfo}>
+                <div className={styles.post_title}>{modalInfo.title}</div>
+                <img
+                  className={styles.postImg}
+                  src={`${URL}/image/get/${modalInfo.DrawingImg}`}
+                />
+              </div>
+              <div className={styles.icons}>
+                <i
+                  className={
+                    toggleLike
+                      ? `fas fa-heart ${styles.icon_like}`
+                      : `far fa-heart ${styles.icon_like}`
+                  }
+                  onClick={handleToggleLike}
+                ></i>
+
+                <span className={styles.likeCount}>{likeCountNum}</span>
+                <i
+                  className={
+                    toggleReply
+                      ? `fas fa-comment-dots ${styles.icon_reply}`
+                      : `far fa-comment-dots ${styles.icon_reply}`
+                  }
+                  onClick={handleToggleReply}
+                ></i>
+                <i></i>
+              </div>
+            </div>
+            <div
+              className={
+                toggleReply
+                  ? `${styles.comments}`
+                  : `${styles.comments} ${styles.active}`
+              }
+            >
+              {postComments.length > 0 ? (
+                <ul className={styles.showComments}>
+                  {postComments.map(comment => (
+                    <li className={styles.comment}>
+                      <span className={styles.comment_nickname}>
+                        {comment.nickname}
+                      </span>
+                      <span className={styles.comment_colon}>:</span>
+                      <span className={styles.comment_content}>
+                        {comment.comment}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div>없다.</div>
+              )}
+              {accessToken ? (
+                <div className={styles.comment_upload}>
+                  <input type="text" className={styles.comment_input} />
+                  <button className={styles.comment_btn}></button>
+                </div>
+              ) : (
+                <div className={styles.msg}>
+                  댓글을 달기 위해 로그인이 필요합니다.
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       ) : null}
     </>
