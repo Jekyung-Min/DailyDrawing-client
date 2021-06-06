@@ -14,7 +14,7 @@
 }
 
 .searchBarWrapper {
-  background-color: #efefef;
+  background-color: snow;
   display: flex;
   height: 48px;
   width: 70%;
@@ -36,6 +36,11 @@
   font-size: 16px;
 }
 
+.search_input::placeholder {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #a49eac;
+}
 .searchBarWrapper > form > input:focus {
   outline: none;
 }
