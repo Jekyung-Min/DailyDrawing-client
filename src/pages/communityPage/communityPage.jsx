@@ -57,31 +57,11 @@ const CommunityPage = ({ showSignModal, setShowSignModal }) => {
     }
   };
 
-  const getPostComment = async modalInfo => {
-    try {
-      const comments = await axios.get(`${URL}/comments/${modalInfo.id}`);
-      const commentsData = [];
-      if (comments.data.comments) {
-        comments.data.comments.forEach(async (comment, idx) => {
-          const { data } = await axios.get(`${URL}/user/${comment.Users_id}`);
-          commentsData.push({
-            nickname: data.userInfo.nickname,
-            comment: comment.comment,
-          });
-          if (comments.data.comments.length - 1 === idx) {
-            setPostComments(commentsData);
-          }
-          return;
-        });
-      }
-    } catch (err) {
-      setPostComments([]);
-    }
-  };
   const getModalInfo = async modalInfo => {
     setModalInfo(modalInfo);
     try {
-      // setPostComments(comments.data.comments);
+      const comments = await axios.get(`${URL}/comments/${modalInfo.id}`);
+      setPostComments(comments.data.comments);
       const userInfo = await axios.get(`${URL}/user/${modalInfo.Users_id}`);
       setPostUserInfo(userInfo.data.userInfo);
       const likeNum = await axios.get(`${URL}/like/count/${modalInfo.id}`);
@@ -89,7 +69,6 @@ const CommunityPage = ({ showSignModal, setShowSignModal }) => {
     } catch (err) {
       console.log(err);
     }
-    getPostComment(modalInfo);
   };
 
   return (
