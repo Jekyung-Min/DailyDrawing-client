@@ -18,7 +18,8 @@ const CommunityHeader = ({ onSubmit }) => {
           </IconButton>
           <form>
             <input
-              placeholder="닉네임이나 태그로 검색해보세요! ex) jehyun, 서양화"
+              className={styles.search_input}
+              placeholder="닉네임이나 태그로 검색해보세요! ex) bee771, 서양화"
               type="text"
               onChange={e => setInput(e.target.value)}
             />
