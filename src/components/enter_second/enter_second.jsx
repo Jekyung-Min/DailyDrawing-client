@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./enter_second.module.css";
 import Fade from "react-reveal/Fade";
 import CountUp from "react-countup";
+import VisibilitySensor from "react-visibility-sensor";
 
 const EnterSecond = ({ aboutRef }) => {
   return (
@@ -23,19 +24,37 @@ const EnterSecond = ({ aboutRef }) => {
           <div className={`${styles.about_data}`}>
             <p className={`${styles.about_description}`}>
               약 7년간{" "}
-              <CountUp end={220000} separator={","} duration={4}></CountUp>
+              <CountUp end={220000} separator={","} duration={2}>
+                {({ countUpRef, start }) => (
+                  <VisibilitySensor onChange={start} delayedCall>
+                    <strong ref={countUpRef} />
+                  </VisibilitySensor>
+                )}
+              </CountUp>
               명이 참여해주셨습니다.
               <br />
               <br />
               지금까지 누적{" "}
-              <CountUp end={2000000} separator={","} duration={4}></CountUp>
+              <CountUp end={2000000} separator={","} duration={2}>
+                {({ countUpRef, start }) => (
+                  <VisibilitySensor onChange={start} delayedCall>
+                    <strong ref={countUpRef} />
+                  </VisibilitySensor>
+                )}
+              </CountUp>
               개의 완성작을 남겨주셨으며
               <br />
               <br />
               DailyDrawing의 파트너사는 홍익대학교를 포함하여
               <br />
               <br />
-              <CountUp end={500} separator={","} duration={4}></CountUp>
+              <CountUp end={500} separator={","} duration={2}>
+                {({ countUpRef, start }) => (
+                  <VisibilitySensor onChange={start} delayedCall>
+                    <strong ref={countUpRef} />
+                  </VisibilitySensor>
+                )}
+              </CountUp>
               군데를 돌파하였습니다.
             </p>
 
@@ -47,8 +66,14 @@ const EnterSecond = ({ aboutRef }) => {
                     prefix={"0"}
                     suffix={"+"}
                     separator={","}
-                    duration={4}
-                  ></CountUp>
+                    duration={3}
+                  >
+                    {({ countUpRef, start }) => (
+                      <VisibilitySensor onChange={start} delayedCall>
+                        <strong ref={countUpRef} />
+                      </VisibilitySensor>
+                    )}
+                  </CountUp>
                 </span>
                 <span className={`${styles.about_info_name}`}>
                   운영
@@ -63,8 +88,14 @@ const EnterSecond = ({ aboutRef }) => {
                     suffix={"+"}
                     end={2000000}
                     separator={","}
-                    duration={4}
-                  ></CountUp>
+                    duration={3}
+                  >
+                    {({ countUpRef, start }) => (
+                      <VisibilitySensor onChange={start} delayedCall>
+                        <strong ref={countUpRef} />
+                      </VisibilitySensor>
+                    )}
+                  </CountUp>
                 </span>
                 <span className={`${styles.about_info_name}`}>
                   누적 <br /> 완성작
@@ -73,12 +104,13 @@ const EnterSecond = ({ aboutRef }) => {
 
               <div>
                 <span className={`${styles.about_info_title}`}>
-                  <CountUp
-                    suffix={"+"}
-                    end={500}
-                    separator={","}
-                    duration={4}
-                  ></CountUp>
+                  <CountUp suffix={"+"} end={500} separator={","} duration={3}>
+                    {({ countUpRef, start }) => (
+                      <VisibilitySensor onChange={start} delayedCall>
+                        <strong ref={countUpRef} />
+                      </VisibilitySensor>
+                    )}
+                  </CountUp>
                 </span>
                 <span className={`${styles.about_info_name}`}>
                   협력 <br /> 파트너사
