@@ -88,7 +88,7 @@ const EnterSecond = ({ aboutRef }) => {
                     suffix={"+"}
                     end={2000000}
                     separator={","}
-                    duration={3}
+                    duration={2}
                   >
                     {({ countUpRef, start }) => (
                       <VisibilitySensor onChange={start} delayedCall>
