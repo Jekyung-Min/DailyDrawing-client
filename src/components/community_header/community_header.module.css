@@ -23,6 +23,10 @@
   padding-left: 10px;
 }
 
+.fa_search {
+  color: #726b6a;
+}
+
 .searchBarWrapper > form {
   display: flex;
   flex: 1;
@@ -30,6 +34,7 @@
 
 .searchBarWrapper > form > input {
   background-color: transparent;
+  color: var(--header-color);
   border: none;
   width: 100%;
   margin-left: 5px;
