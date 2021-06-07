@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSpring, animated } from "react-spring";
+import { fetchData, getAllPostInfo } from "../../actions";
 import styles from "./participate_modal.module.css";
 
 const URL = process.env.REACT_APP_SERVER_URL;
@@ -9,12 +10,18 @@ const Participate_modal = ({
   showParticipateModal,
   setShowParticipateModal,
 }) => {
-  /* participate 작업중
+  const { accessToken } = useSelector(state => state.userReducer.user);
   const backRef = useRef();
   const dispatch = useDispatch();
   const addImg = useRef(null);
   const imgInput = useRef(null);
   const [currentImg, setCurrentImg] = useState(null);
+  const [uploadImg, setUploadImg] = useState(null);
+  const [typeInfo, setTypeInfo] = useState({ title: null, newTag: null });
+  const handleTypeInfo = key => event => {
+    setTypeInfo(preState => ({ ...preState, [key]: event.target.value }));
+  };
+
   const closeModal = e => {
     if (backRef.current === e.target) {
       setShowParticipateModal(false);
@@ -23,16 +30,53 @@ const Participate_modal = ({
 
   const onChange = useCallback(() => {
     const file = imgInput.current.files[0];
-    setCurrentImg(file);
+    setUploadImg(file);
     if (file) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        addImg.current.style.backgroundImage = `url(${reader.result})`;
+        // addImg.current.style.backgroundImage = `url(${reader.result})`;
+        setCurrentImg(reader.result);
       };
     }
   }, []);
 
+  const handleUpload = async () => {
+    if (currentImg && typeInfo.title) {
+      try {
+        const img = new FormData();
+        img.append("file", uploadImg);
+        img.append("title", typeInfo.title);
+        img.append("description", "");
+        img.append("isCompleted", true);
+
+        const { data } = await axios.post(`${URL}/drawing/upload`, img, {
+          headers: { authorization: `Bearer ${accessToken}` },
+        });
+
+        if (typeInfo.newTag) {
+          try {
+            await axios.post(
+              `${URL}/drawingsTags/upload`,
+              {
+                Tags_id: "1,2",
+                Drawings_id: data.id,
+                newTag: typeInfo.newTag,
+              },
+              {
+                headers: { authorization: `Bearer ${accessToken}` },
+              }
+            );
+          } catch (err) {
+            setCurrentImg(null);
+          }
+        }
+        dispatch(fetchData(`${URL}/drawing/getall`, {}, getAllPostInfo));
+        setCurrentImg(null);
+        setShowParticipateModal(false);
+      } catch (err) {}
+    }
+  };
   return (
     <>
       {showParticipateModal ? (
@@ -59,73 +103,46 @@ const Participate_modal = ({
               <span className={styles.imgBtn_msg}>업로드할 그림선택</span>
             </label>
 
-            <div className={styles.section_input}>
-              <div
+            <div
+              className={
+                currentImg
+                  ? `${styles.section_input}`
+                  : `${styles.section_input} ${styles.active}`
+              }
+            >
+              {/* <div
                 className={styles.img}
                 id="addImg"
                 ref={addImg}
                 onChange={onChange}
               />
-            </div>
-            <button
-              className={styles.btn_upload}
-              onClick={() => {
-                console.log("hi");
-              }}
-            >
-              Upload
-            </button>
-          </div>
-        </div>
-      ) : null}
-    </>
-  );
-  */
+            </div> */}
+              {currentImg ? (
+                <img className={styles.img} src={`${currentImg}`} />
+              ) : (
+                <div className={styles.margin}></div>
+              )}
+              <div className={styles.user}>
+                {/* <i className="fas fa-file-signature"></i> */}
+                <i class="fas fa-signature"></i>
+                <input
+                  type="text"
+                  placeholder="Title을 입력하세요"
+                  onChange={handleTypeInfo("title")}
+                ></input>
+              </div>
 
-  const backRef = useRef();
-
-  const closeModal = e => {
-    if (backRef.current === e.target) {
-      setShowParticipateModal(false);
-    }
-  };
-
-  const animation = useSpring({
-    config: {
-      duration: 200,
-    },
-    opacity: showParticipateModal ? 1 : 0,
-    transform: showParticipateModal ? `translateY(6%)` : `translateY(10%)`,
-  });
-
-  return (
-    <>
-      {showParticipateModal ? (
-        <div className={styles.back} onClick={closeModal} ref={backRef}>
-          <div className={styles.container}>
-            <div className={styles.close}>
-              <i
-                className="fas fa-times"
-                onClick={() => {
-                  setShowParticipateModal(pre => !pre);
-                }}
-              ></i>
-            </div>
-            {/* <i class="fas fa-exclamation-circle"></i> */}
-            <div className={styles.content}>
-              <i class="fas fa-exclamation-triangle"></i>
-              <div className={styles.msgbox}>
-                <div className={styles.msg}>곧 업데이트 될 예정입니다.</div>
-                <div className={styles.msg}>불편을 드려 죄송합니다.</div>
+              <div className={styles.user}>
+                <i className="fas fa-tag"></i>
+                <input
+                  type="text"
+                  placeholder="(Option) 태그를 추가해보세요! "
+                  onChange={handleTypeInfo("newTag")}
+                ></input>
               </div>
             </div>
-            <button
-              className={styles.btn_close}
-              onClick={() => {
-                setShowParticipateModal(pre => !pre);
-              }}
-            >
-              Close
+            <button className={styles.btn_upload} onClick={handleUpload}>
+              Upload
             </button>
           </div>
         </div>

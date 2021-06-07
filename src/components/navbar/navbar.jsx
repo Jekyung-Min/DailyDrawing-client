@@ -195,8 +195,13 @@ const Navbar = ({
             <a
               className={styles.link}
               onClick={() => {
-                setShowParticipateModal(pre => !pre);
-                closeMobileMenu();
+                if (accessToken) {
+                  setShowParticipateModal(pre => !pre);
+                  closeMobileMenu();
+                } else {
+                  setShowSignModal(pre => !pre);
+                  closeMobileMenu();
+                }
               }}
             >
               Participate
