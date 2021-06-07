@@ -100,3 +100,13 @@ button {
 .errMsg_margin {
   margin-top: 3rem;
 }
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 330px;
+  }
+
+  .user > input {
+    width: 280px;
+  }
+}
