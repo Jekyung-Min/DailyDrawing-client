@@ -13,6 +13,7 @@ const Navbar = ({
   partnersRef,
   setShowSignModal,
   setShowProfileModal,
+  setShowParticipateModal,
 }) => {
   const userInfo = useSelector(state => state.userReducer.user);
   const dispatch = useDispatch();
@@ -191,13 +192,15 @@ const Navbar = ({
             </Link>
           </li>
           <li className={styles.item}>
-            <Link
-              to="/participate"
+            <a
               className={styles.link}
-              onClick={closeMobileMenu}
+              onClick={() => {
+                setShowParticipateModal(pre => !pre);
+                closeMobileMenu();
+              }}
             >
               Participate
-            </Link>
+            </a>
           </li>
           {accessToken ? (
             <li>
