@@ -16,15 +16,16 @@ export const CommunityModal = ({
   likeCountNum,
   handleCountNum,
 }) => {
-
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.userReducer.user);
-  const myLikes = useSelector(state => state.likeReducer.myLikes);
+  const userInfo = useSelector((state) => state.userReducer.user);
+  const myLikes = useSelector((state) => state.likeReducer.myLikes);
   const { accessToken } = userInfo;
   const [toggleReply, setToggleReply] = useState(true);
   const [toggleLike, setToggleLike] = useState(false);
   const [typeInfo, setTypeInfo] = useState(null);
-  const inputRef = useRef();
+  const inputRef1 = useRef();
+  const inputRef2 = useRef();
+
   const backRef = useRef();
 
   const animation = useSpring({
@@ -46,7 +47,7 @@ export const CommunityModal = ({
   };
   const handleToggleLike = () => {
     if (accessToken) {
-      setToggleLike(pre => !pre);
+      setToggleLike((pre) => !pre);
     }
   };
 
@@ -59,7 +60,7 @@ export const CommunityModal = ({
     [setShowModal, showModal]
   );
 
-  const handleBtnComment = async () => {
+  const handleBtnComment = async (inputRef) => {
     if (inputRef.current.value !== "" && inputRef.current.value !== null) {
       try {
         const obj = {
@@ -80,6 +81,7 @@ export const CommunityModal = ({
       }
     }
   };
+
   const handleBtnLike = async () => {
     if (accessToken && toggleLike) {
       try {
@@ -105,7 +107,7 @@ export const CommunityModal = ({
 
   useEffect(() => {
     console.log("hi");
-    const likePostIds = myLikes.map(like => like.Drawings_id);
+    const likePostIds = myLikes.map((like) => like.Drawings_id);
     if (modalInfo && likePostIds.includes(modalInfo.id)) {
       setToggleLike(true);
     } else {
@@ -129,10 +131,9 @@ export const CommunityModal = ({
 
   return (
     <>
-      {showModal && postUserInfo && postComments ? (
+      {showModal && postUserInfo ? (
         <div className={styles.back} onClick={closeModal} ref={backRef}>
-          <animated.div
-            style={animation}
+          <div
             className={
               toggleReply
                 ? `${styles.container}`
@@ -190,104 +191,90 @@ export const CommunityModal = ({
                     }
                     onClick={handleToggleReply}
                   ></i>
-                  <i></i>
                 </div>
+                {toggleReply ? (
+                  <div>
+                    {accessToken ? (
+                      <div className={styles.comment_upload_second}>
+                        <i
+                          class="far fa-comments"
+                          onClick={() => {
+                            handleBtnComment(inputRef1);
+                          }}
+                        ></i>
+                        <input
+                          placeholder="댓글을 입력해주세요."
+                          type="text"
+                          className={styles.comment_input}
+                          ref={inputRef1}
+                          onKeyPress={(event) => {
+                            if (event.key === "Enter") {
+                              handleBtnComment(inputRef1);
+                            }
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      <div className={styles.msg_second}>
+                        댓글을 달기 위해 로그인이 필요합니다.
+                      </div>
+                    )}
+                  </div>
+                ) : null}
               </div>
+
               <div
                 className={
                   toggleReply
-                    ? `${styles.postAndComment}`
-                    : `${styles.postAndComment} ${styles.active}`
+                    ? `${styles.comments}`
+                    : `${styles.comments} ${styles.active}`
                 }
               >
-                <div className={styles.post}>
-                  <div className={styles.post_userInfo}>
-                    <img
-                      className={styles.userInfo_img}
-                      src={`${URL}/profile/get/${postUserInfo.profileImg}`}
-                    />
-                    <span className={styles.userInfo_nickname}>
-                      {postUserInfo.nickname}
-                    </span>
-                  </div>
-                  <div className={styles.post_postInfo}>
-                    <div className={styles.post_title}>{modalInfo.title}</div>
-                    <img
-                      className={styles.postImg}
-                      src={`${URL}/image/get/${modalInfo.DrawingImg}`}
-                    />
-                  </div>
-                  <div className={styles.icons}>
+                {postComments.length > 0 ? (
+                  <ul className={styles.showComments}>
+                    {postComments.map((comment) => (
+                      <li className={styles.comment}>
+                        <span className={styles.comment_nickname}>
+                          {comment.nickname}
+                        </span>
+                        <span className={styles.comment_colon}>:</span>
+                        <span className={styles.comment_content}>
+                          {comment.comment}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <div>아직 등록된 댓글이 없습니다.</div>
+                )}
+                {accessToken ? (
+                  <div className={styles.comment_upload}>
                     <i
-                      className={
-                        toggleLike
-                          ? `fas fa-heart ${styles.icon_like}`
-                          : `far fa-heart ${styles.icon_like}`
-                      }
-                      onClick={handleToggleLike}
+                      class="far fa-comments"
+                      onClick={() => {
+                        handleBtnComment(inputRef2);
+                      }}
                     ></i>
-
-                    <span className={styles.likeCount}>{likeCountNum}</span>
-                    <i
-                      className={
-                        toggleReply
-                          ? `fas fa-comment-dots ${styles.icon_reply}`
-                          : `far fa-comment-dots ${styles.icon_reply}`
-                      }
-                      onClick={handleToggleReply}
-                    ></i>
-                    <i></i>
+                    <input
+                      placeholder="댓글을 입력해주세요."
+                      type="text"
+                      className={styles.comment_input}
+                      ref={inputRef2}
+                      onKeyPress={(event) => {
+                        if (event.key === "Enter") {
+                          handleBtnComment(inputRef2);
+                        }
+                      }}
+                    />
                   </div>
-                </div>
-
-                <div
-                  className={
-                    toggleReply
-                      ? `${styles.comments}`
-                      : `${styles.comments} ${styles.active}`
-                  }
-                >
-                  {postComments.length > 0 ? (
-                    <ul className={styles.showComments}>
-                      {postComments.map((comment) => (
-                        <li className={styles.comment}>
-                          <span className={styles.comment_nickname}>
-                            {comment.nickname}
-                          </span>
-                          <span className={styles.comment_colon}>:</span>
-                          <span className={styles.comment_content}>
-                            {comment.comment}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div>아직 등록된 댓글이 없습니다.</div>
-                  )}
-                  {accessToken ? (
-                    <div className={styles.comment_upload}>
-                      <i class="far fa-comments" onClick={handleBtnComment}></i>
-                      <input
-                        placeholder="댓글을 입력해주세요."
-                        type="text"
-                        className={styles.comment_input}
-                        ref={inputRef}
-                        onKeyPress={(event) => {
-                          if (event.key === "Enter") {
-                            handleBtnComment();
-                          }
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    <div className={styles.msg}>
-                      댓글을 달기 위해 로그인이 필요합니다.
-                    </div>
-                  )}
-                </div>
+                ) : (
+                  <div className={styles.msg}>
+                    댓글을 달기 위해 로그인이 필요합니다.
+                  </div>
+                )}
               </div>
-            </Fade>
-          </animated.div>
+            </div>
+          </div>
         </div>
       ) : null}
     </>
