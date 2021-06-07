@@ -130,3 +130,14 @@ button {
   font-weight: 700;
   color: crimson;
 }
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 330px;
+    height: 480px;
+  }
+
+  .user > input {
+    width: 280px;
+  }
+}
