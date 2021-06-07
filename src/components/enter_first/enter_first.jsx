@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./enter_first.module.css";
 import Fade from "react-reveal/Fade";
 
@@ -26,12 +27,12 @@ const EnterFirst = ({ scrollToCourse, scrollPossible }) => {
                 DailyDrawing과 함께 꿈을 이루어 보세요.
               </p>
               <div className={`${styles.button_wrapper} `}>
-                <a
-                  href="/community"
+                <Link
+                  to="/community"
                   className={`${styles.button} ${styles.button_flex}`}
                 >
                   둘러보기
-                </a>
+                </Link>
               </div>
             </div>
           </Fade>
