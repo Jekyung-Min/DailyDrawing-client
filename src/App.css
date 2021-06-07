@@ -2,6 +2,7 @@
 /*==================== VARIABLES CSS ====================*/
 :root {
   --invert-status: 0;
+  --header-color: hsl(var(--hue-color), 29%, 16%);
   --header-height: 3rem;
 
   /*========== Colors ==========*/
@@ -125,6 +126,7 @@ img {
 body.dark_theme {
   /* HSL color mode */
   --invert-status: 1;
+  --header-color: hsl(var(--hue-color), 70%, 96%);
   --first-color-second: hsl(var(--hue-color), 30%, 8%);
   --title-color: hsl(var(--hue-color), 8%, 95%);
   --text-color: hsl(var(--hue-color), 8%, 75%);
