@@ -7,11 +7,14 @@ import { useState } from "react";
 const App = () => {
   const [showSignModal, setShowSignModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showParticipateModal, setShowParticipateModal] = useState(false);
   return (
     <Router>
       <Switch>
         <Route exact path="/">
           <EnterPage
+            showParticipateModal={showParticipateModal}
+            setShowParticipateModal={setShowParticipateModal}
             showProfileModal={showProfileModal}
             setShowProfileModal={setShowProfileModal}
             setShowSignModal={setShowSignModal}
@@ -20,15 +23,14 @@ const App = () => {
         </Route>
         <Route path="/community">
           <CommunityPage
+            showParticipateModal={showParticipateModal}
+            setShowParticipateModal={setShowParticipateModal}
             showProfileModal={showProfileModal}
             setShowProfileModal={setShowProfileModal}
             setShowSignModal={setShowSignModal}
             showSignModal={showSignModal}
           ></CommunityPage>
         </Route>
-        <Route path="/main"></Route>
-        <Route path="/list"></Route>
-        <Route path="/check"></Route>
       </Switch>
     </Router>
   );

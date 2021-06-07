@@ -11,12 +11,15 @@ import EnterSixth from "../../components/enter_sixth/enter_sixth";
 import { useLocation } from "react-router";
 import Sign_modal from "../../components/sign_modal/sign_modal";
 import Profile_modal from "../../components/profile_modal/profile_modal";
+import Participate_modal from "../../components/participate_modal/participate_modal";
 
 const EnterPage = ({
   showSignModal,
   setShowSignModal,
   showProfileModal,
   setShowProfileModal,
+  showParticipateModal,
+  setShowParticipateModal,
 }) => {
   const [scrollPossible, setScrollPossible] = useState(false);
   // const location = useLocation();
@@ -44,6 +47,10 @@ const EnterPage = ({
 
   return (
     <>
+      <Participate_modal
+        showParticipateModal={showParticipateModal}
+        setShowParticipateModal={setShowParticipateModal}
+      />
       <Profile_modal
         showProfileModal={showProfileModal}
         setShowProfileModal={setShowProfileModal}
@@ -57,6 +64,7 @@ const EnterPage = ({
         partnersRef={partnersRef}
         setShowSignModal={setShowSignModal}
         setShowProfileModal={setShowProfileModal}
+        setShowParticipateModal={setShowParticipateModal}
       ></Navbar>
       <EnterFirst
         scrollToCourse={scrollToCourse}
