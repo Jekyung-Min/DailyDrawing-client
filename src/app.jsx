@@ -6,17 +6,22 @@ import { useState } from "react";
 
 const App = () => {
   const [showSignModal, setShowSignModal] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
   return (
     <Router>
       <Switch>
         <Route exact path="/">
           <EnterPage
+            showProfileModal={showProfileModal}
+            setShowProfileModal={setShowProfileModal}
             setShowSignModal={setShowSignModal}
             showSignModal={showSignModal}
           ></EnterPage>
         </Route>
         <Route path="/community">
           <CommunityPage
+            showProfileModal={showProfileModal}
+            setShowProfileModal={setShowProfileModal}
             setShowSignModal={setShowSignModal}
             showSignModal={showSignModal}
           ></CommunityPage>
