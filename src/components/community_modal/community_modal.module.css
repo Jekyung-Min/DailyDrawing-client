@@ -12,8 +12,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 800px;
-  /* background-color: #f2f2f2; */
   background-color: var(--body-color);
   border-radius: 1rem;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.6);
@@ -92,6 +90,7 @@
 }
 
 /* 댓글창 css  */
+
 .comments {
   display: flex;
   flex-direction: column;
@@ -107,6 +106,10 @@
   margin-right: 0.5rem;
 }
 
+.showComments {
+  overflow-y: auto;
+  height: 80%;
+}
 /* 댓글 입력창 */
 .msg {
   margin-bottom: 1.5rem;
@@ -128,14 +131,15 @@
 }
 
 .comment_upload > input {
+  background-color: var(--container-color);
   border: none;
   outline: none;
-  width: 360px;
+  width: 100%;
   font-size: 1rem;
   font-weight: 700;
   padding: 0.7rem 0;
   padding-left: 3rem;
-  color: #23004d;
+  color: var(--header-color);
   border-radius: 5rem;
 }
 
@@ -143,6 +147,39 @@
   font-size: 1rem;
   color: #a49eac;
 }
+
+.comment_upload_second {
+  display: flex;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.comment_upload_second > i {
+  cursor: pointer;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 6px;
+  left: 15px;
+}
+
+.comment_upload_second > input {
+  background-color: var(--container-color);
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.7rem 0;
+  padding-left: 3rem;
+  color: var(--header-color);
+  border-radius: 5rem;
+}
+
+.comment_upload_second > input::placeholder {
+  font-size: 1rem;
+  color: #a49eac;
+}
+
 /* reply toggle 후 */
 .container.active {
   width: 500px;
@@ -152,4 +189,63 @@
 }
 .postAndComment.active {
   justify-content: center;
+}
+
+@media screen and (min-width: 200px) {
+  .container {
+    width: 320px;
+  }
+  .container.active {
+    width: 320px;
+  }
+  .postImg {
+    width: 280px;
+    height: auto;
+  }
+
+  .comments {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 503px) {
+  .container {
+    width: 400px;
+  }
+  .container.active {
+    width: 400px;
+  }
+  .postImg {
+    width: 360px;
+    height: auto;
+  }
+
+  .comments {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 757px) {
+  .container {
+    width: 720px;
+  }
+  .container.active {
+    width: 500px;
+  }
+
+  .postAndComment.active .postImg {
+    width: 380px;
+  }
+
+  .comments {
+    display: flex;
+  }
+
+  .comment_upload_second {
+    display: none;
+  }
+
+  .msg_second {
+    display: none;
+  }
 }
