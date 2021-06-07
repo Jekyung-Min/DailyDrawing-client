@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./enter_second.module.css";
 import Fade from "react-reveal/Fade";
 import CountUp from "react-countup";
+import { Link } from "react-router-dom";
 import VisibilitySensor from "react-visibility-sensor";
 
 const EnterSecond = ({ aboutRef }) => {
@@ -119,12 +120,12 @@ const EnterSecond = ({ aboutRef }) => {
             </div>
 
             <div className={`${styles.about_buttons}`}>
-              <a
-                href="/community"
+              <Link
+                to="/community"
                 className={`${styles.button} ${styles.button_flex}`}
               >
                 둘러보기
-              </a>
+              </Link>
             </div>
           </div>
         </Fade>
