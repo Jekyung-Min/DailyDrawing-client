@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./enter_third.module.css";
+import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 
 const EnterThird = (props) => {
@@ -19,12 +20,12 @@ const EnterThird = (props) => {
               참여하며 동료들과 정보를 공유하세요! DailyDrawing이 함께합니다.
             </p>
             <div className={`${styles.button_wrapper} `}>
-              <a
-                href="/community"
+              <Link
+                to="/community"
                 className={`${styles.button} ${styles.button_flex}`}
               >
                 둘러보기
-              </a>
+              </Link>
             </div>
           </div>
         </Fade>
