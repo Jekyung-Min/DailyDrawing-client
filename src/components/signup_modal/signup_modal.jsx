@@ -14,19 +14,19 @@ const Signup_modal = ({ showSignUpModal, setShowSignUpModal }) => {
     repassword: "",
   });
 
-  const closeModal = (e) => {
+  const closeModal = e => {
     if (backRef.current === e.target) {
       setShowSignUpModal(false);
     }
   };
 
-  const handleUserInfo = (key) => (event) => {
-    setUserInfo((preState) => ({ ...preState, [key]: event.target.value }));
+  const handleUserInfo = key => event => {
+    setUserInfo(preState => ({ ...preState, [key]: event.target.value }));
   };
 
   const validCheck = () => {
     const { email, password, repassword } = userInfo;
-    const isFill = Object.keys(userInfo).every((key) => userInfo[key] !== "");
+    const isFill = Object.keys(userInfo).every(key => userInfo[key] !== "");
     if (!isFill) {
       return setMessage("모든 정보를 입력해주세요.");
     } else if (email.includes("@") === false) {
@@ -66,13 +66,13 @@ const Signup_modal = ({ showSignUpModal, setShowSignUpModal }) => {
       {showSignUpModal ? (
         <div className={styles.back} onClick={closeModal} ref={backRef}>
           <div className={styles.container}>
-            <div
-              className={styles.close}
-              onClick={() => {
-                setShowSignUpModal((pre) => !pre);
-              }}
-            >
-              <i className="fas fa-times"></i>
+            <div className={styles.close}>
+              <i
+                className="fas fa-times"
+                onClick={() => {
+                  setShowSignUpModal(pre => !pre);
+                }}
+              ></i>
             </div>
             <h4 className={styles.title}>Sign Up</h4>
             <div className={styles.user}>
