@@ -14,9 +14,15 @@ import { CommunityModal } from "../../components/community_modal/community_modal
 import axios from "axios";
 import { CommunityComment } from "../../components/community_comment/community_comment";
 import Sign_modal from "../../components/sign_modal/sign_modal";
+import Profile_modal from "../../components/profile_modal/profile_modal";
 
 const URL = process.env.REACT_APP_SERVER_URL;
-const CommunityPage = ({ showSignModal, setShowSignModal }) => {
+const CommunityPage = ({
+  showSignModal,
+  setShowSignModal,
+  showProfileModal,
+  setShowProfileModal,
+}) => {
   const postsState = useSelector(state => state.postReducer);
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
@@ -73,6 +79,10 @@ const CommunityPage = ({ showSignModal, setShowSignModal }) => {
   };
   return (
     <>
+      <Profile_modal
+        showProfileModal={showProfileModal}
+        setShowProfileModal={setShowProfileModal}
+      />
       <Sign_modal
         showSignModal={showSignModal}
         setShowSignModal={setShowSignModal}
@@ -86,7 +96,11 @@ const CommunityPage = ({ showSignModal, setShowSignModal }) => {
         handleCountNum={handleCountNum}
         setShowModal={setShowModal}
       ></CommunityModal>
-      <Navbar link="listPage" setShowSignModal={setShowSignModal}></Navbar>
+      <Navbar
+        link="listPage"
+        setShowSignModal={setShowSignModal}
+        setShowProfileModal={setShowProfileModal}
+      ></Navbar>
       <CommunityHeader onSubmit={onSearchSubmit} />
       <CommunityMain
         openModal={openModal}
