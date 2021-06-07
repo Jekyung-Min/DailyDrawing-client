@@ -3,7 +3,8 @@ import { useSpring, animated } from "react-spring";
 import styles from "./community_modal.module.css";
 import Fade from "react-reveal/Fade";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData, getMyLikes } from "../../actions";
 
 const URL = process.env.REACT_APP_SERVER_URL;
 export const CommunityModal = ({
@@ -13,8 +14,12 @@ export const CommunityModal = ({
   postComments,
   postUserInfo,
   likeCountNum,
+  handleCountNum,
 }) => {
-  const userInfo = useSelector((state) => state.userReducer.user);
+
+  const dispatch = useDispatch();
+  const userInfo = useSelector(state => state.userReducer.user);
+  const myLikes = useSelector(state => state.likeReducer.myLikes);
   const { accessToken } = userInfo;
   const [toggleReply, setToggleReply] = useState(true);
   const [toggleLike, setToggleLike] = useState(false);
@@ -35,11 +40,14 @@ export const CommunityModal = ({
       setShowModal(false);
     }
   };
+
   const handleToggleReply = () => {
     setToggleReply((pre) => !pre);
   };
   const handleToggleLike = () => {
-    setToggleLike((pre) => !pre);
+    if (accessToken) {
+      setToggleLike(pre => !pre);
+    }
   };
 
   const keyPress = useCallback(
@@ -72,12 +80,52 @@ export const CommunityModal = ({
       }
     }
   };
-  const handleBtnLike = () => {};
+  const handleBtnLike = async () => {
+    if (accessToken && toggleLike) {
+      try {
+        await axios.delete(`${URL}/like/down`, {
+          headers: { authorization: `Bearer ${accessToken}` },
+          data: { id: modalInfo.id },
+        });
+        handleCountNum("-");
+        setToggleLike(false);
+      } catch (err) {}
+    } else if (accessToken && !toggleLike) {
+      try {
+        await axios.post(
+          `${URL}/like/up`,
+          { id: modalInfo.id },
+          { headers: { authorization: `Bearer ${accessToken}` } }
+        );
+        handleCountNum("+");
+        setToggleLike(true);
+      } catch (err) {}
+    }
+  };
 
   useEffect(() => {
+    console.log("hi");
+    const likePostIds = myLikes.map(like => like.Drawings_id);
+    if (modalInfo && likePostIds.includes(modalInfo.id)) {
+      setToggleLike(true);
+    } else {
+      setToggleLike(false);
+    }
+    if (accessToken) {
+      dispatch(
+        fetchData(
+          `${URL}/like/get`,
+          { headers: { authorization: `Bearer ${accessToken}` } },
+          getMyLikes
+        )
+      );
+    } else if (!accessToken) {
+      const myLikes = { myLikes: [] };
+      dispatch(getMyLikes(myLikes));
+    }
     document.addEventListener("keydown", keyPress);
     return () => document.removeEventListener("keydown", keyPress);
-  }, [keyPress]);
+  }, [keyPress, accessToken]);
 
   return (
     <>
@@ -99,7 +147,52 @@ export const CommunityModal = ({
             >
               <i className={`fas fa-times ${styles.icon_close}`}></i>
             </div>
-            <Fade top cascade duration={1800} distance={"15px"}>
+            <div
+              className={
+                toggleReply
+                  ? `${styles.postAndComment}`
+                  : `${styles.postAndComment} ${styles.active}`
+              }
+            >
+              <div className={styles.post}>
+                <div className={styles.post_userInfo}>
+                  <img
+                    className={styles.userInfo_img}
+                    src={`${URL}/profile/get/${postUserInfo.profileImg}`}
+                  />
+                  <span className={styles.userInfo_nickname}>
+                    {postUserInfo.nickname}
+                  </span>
+                </div>
+                <div className={styles.post_postInfo}>
+                  <div className={styles.post_title}>{modalInfo.title}</div>
+                  <img
+                    className={styles.postImg}
+                    src={`${URL}/image/get/${modalInfo.DrawingImg}`}
+                  />
+                </div>
+                <div className={styles.icons}>
+                  <i
+                    className={
+                      toggleLike
+                        ? `fas fa-heart ${styles.icon_like}`
+                        : `far fa-heart ${styles.icon_like}`
+                    }
+                    onClick={handleBtnLike}
+                  ></i>
+
+                  <span className={styles.likeCount}>{likeCountNum}</span>
+                  <i
+                    className={
+                      toggleReply
+                        ? `fas fa-comment-dots ${styles.icon_reply}`
+                        : `far fa-comment-dots ${styles.icon_reply}`
+                    }
+                    onClick={handleToggleReply}
+                  ></i>
+                  <i></i>
+                </div>
+              </div>
               <div
                 className={
                   toggleReply

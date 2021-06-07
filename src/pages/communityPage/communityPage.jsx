@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchData, getAllPostInfo, getSearchResult } from "../../actions";
+import {
+  fetchData,
+  getAllPostInfo,
+  getMyLikes,
+  getSearchResult,
+} from "../../actions";
 import CommunityHeader from "../../components/community_header/community_header";
 import CommunityMain from "../../components/community_main/community_main";
 import Navbar from "../../components/navbar/navbar";
@@ -9,14 +14,18 @@ import { CommunityModal } from "../../components/community_modal/community_modal
 import axios from "axios";
 import { CommunityComment } from "../../components/community_comment/community_comment";
 import Sign_modal from "../../components/sign_modal/sign_modal";
+import Profile_modal from "../../components/profile_modal/profile_modal";
 
 const URL = process.env.REACT_APP_SERVER_URL;
-const CommunityPage = ({ showSignModal, setShowSignModal }) => {
+const CommunityPage = ({
+  showSignModal,
+  setShowSignModal,
+  showProfileModal,
+  setShowProfileModal,
+}) => {
   const postsState = useSelector(state => state.postReducer);
-  const searchState = useSelector(state => state.searchReducer);
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
-  const [showComment, setShowComment] = useState(false);
   const [postsData, setPostsData] = useState([]);
   const [modalInfo, setModalInfo] = useState(null);
   const [postUserInfo, setPostUserInfo] = useState(null);
@@ -29,18 +38,12 @@ const CommunityPage = ({ showSignModal, setShowSignModal }) => {
       top: 0,
       behavior: "smooth",
     });
-
     dispatch(fetchData(`${URL}/drawing/getall`, {}, getAllPostInfo));
     setPostsData(postsState.allPostsInfo);
   }, [length]);
 
   const openModal = () => {
     setShowModal(prev => !prev);
-  };
-
-  const openComment = () => {
-    setShowComment(prev => !prev);
-    console.log(1);
   };
 
   const onSearchSubmit = async words => {
@@ -57,31 +60,11 @@ const CommunityPage = ({ showSignModal, setShowSignModal }) => {
     }
   };
 
-  const getPostComment = async modalInfo => {
-    try {
-      const comments = await axios.get(`${URL}/comments/${modalInfo.id}`);
-      const commentsData = [];
-      if (comments.data.comments) {
-        comments.data.comments.forEach(async (comment, idx) => {
-          const { data } = await axios.get(`${URL}/user/${comment.Users_id}`);
-          commentsData.push({
-            nickname: data.userInfo.nickname,
-            comment: comment.comment,
-          });
-          if (comments.data.comments.length - 1 === idx) {
-            setPostComments(commentsData);
-          }
-          return;
-        });
-      }
-    } catch (err) {
-      setPostComments([]);
-    }
-  };
   const getModalInfo = async modalInfo => {
     setModalInfo(modalInfo);
     try {
-      // setPostComments(comments.data.comments);
+      const comments = await axios.get(`${URL}/comments/${modalInfo.id}`);
+      setPostComments(comments.data.comments);
       const userInfo = await axios.get(`${URL}/user/${modalInfo.Users_id}`);
       setPostUserInfo(userInfo.data.userInfo);
       const likeNum = await axios.get(`${URL}/like/count/${modalInfo.id}`);
@@ -89,11 +72,17 @@ const CommunityPage = ({ showSignModal, setShowSignModal }) => {
     } catch (err) {
       console.log(err);
     }
-    getPostComment(modalInfo);
   };
-
+  const handleCountNum = operation => {
+    if (operation === "+") setLikeCountNum(likeCountNum + 1);
+    else if (operation === "-") setLikeCountNum(likeCountNum - 1);
+  };
   return (
     <>
+      <Profile_modal
+        showProfileModal={showProfileModal}
+        setShowProfileModal={setShowProfileModal}
+      />
       <Sign_modal
         showSignModal={showSignModal}
         setShowSignModal={setShowSignModal}
@@ -104,14 +93,14 @@ const CommunityPage = ({ showSignModal, setShowSignModal }) => {
         postComments={postComments}
         postUserInfo={postUserInfo}
         likeCountNum={likeCountNum}
+        handleCountNum={handleCountNum}
         setShowModal={setShowModal}
-        openComment={openComment}
       ></CommunityModal>
-      <CommunityComment
-        showComment={showComment}
-        setShowComment={setShowComment}
-      ></CommunityComment>
-      <Navbar link="listPage" setShowSignModal={setShowSignModal}></Navbar>
+      <Navbar
+        link="listPage"
+        setShowSignModal={setShowSignModal}
+        setShowProfileModal={setShowProfileModal}
+      ></Navbar>
       <CommunityHeader onSubmit={onSearchSubmit} />
       <CommunityMain
         openModal={openModal}

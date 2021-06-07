@@ -3,18 +3,20 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSpring, animated } from "react-spring";
 import { signIn } from "../../actions";
+import Alert_modal from "../alert_modal/alert_modal";
 import Signup_modal from "../signup_modal/signup_modal";
 import styles from "./sign_modal.module.css";
 
 const URL = process.env.REACT_APP_SERVER_URL;
 const Sign_modal = ({ showSignModal, setShowSignModal }) => {
   const [showSignUpModal, setShowSignUpModal] = useState(false);
+  const [showAlertModal, setShowAlertModal] = useState(false);
   const backRef = useRef();
   const [typeInfo, setTypeInfo] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
   const dispatch = useDispatch();
 
-  const closeModal = (e) => {
+  const closeModal = e => {
     if (backRef.current === e.target) {
       setShowSignModal(false);
     }
@@ -29,11 +31,11 @@ const Sign_modal = ({ showSignModal, setShowSignModal }) => {
   });
 
   const showSignup = () => {
-    setShowSignUpModal((pre) => !pre);
+    setShowSignUpModal(pre => !pre);
   };
 
-  const handleTypeInfo = (key) => (event) => {
-    setTypeInfo((preState) => ({ ...preState, [key]: event.target.value }));
+  const handleTypeInfo = key => event => {
+    setTypeInfo(preState => ({ ...preState, [key]: event.target.value }));
   };
 
   const validCheck = () => {
@@ -71,15 +73,21 @@ const Sign_modal = ({ showSignModal, setShowSignModal }) => {
               setShowSignUpModal={setShowSignUpModal}
             />
           ) : null}
+          {showAlertModal ? (
+            <Alert_modal
+              showAlertModal={showAlertModal}
+              setShowAlertModal={setShowAlertModal}
+            />
+          ) : null}
           <animated.div style={animation}>
             <div className={styles.container}>
-              <div
-                className={styles.close}
-                onClick={() => {
-                  setShowSignModal((pre) => !pre);
-                }}
-              >
-                <i className="fas fa-times"></i>
+              <div className={styles.close}>
+                <i
+                  className="fas fa-times"
+                  onClick={() => {
+                    setShowSignModal(pre => !pre);
+                  }}
+                ></i>
               </div>
               <h1 className={styles.title}>Sign In</h1>
               <div className={styles.user}>
@@ -101,10 +109,22 @@ const Sign_modal = ({ showSignModal, setShowSignModal }) => {
               {message ? <div className={styles.errMsg}>{message}</div> : null}
               <div className={styles.way_login}>
                 <button>
-                  <img className={styles.img_kakao} src="/images/kakao.png" />
+                  <img
+                    className={styles.img_kakao}
+                    src="/images/kakao.png"
+                    onClick={() => {
+                      setShowAlertModal(pre => !pre);
+                    }}
+                  />
                 </button>
                 <button>
-                  <img className={styles.img_google} src="/images/google.jpg" />
+                  <img
+                    className={styles.img_google}
+                    src="/images/google.jpg"
+                    onClick={() => {
+                      setShowAlertModal(pre => !pre);
+                    }}
+                  />
                 </button>
               </div>
               <button className={styles.btn_signIn} onClick={handleBtnSignIn}>

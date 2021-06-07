@@ -7,7 +7,13 @@ import axios from "axios";
 import { signOut } from "../../actions";
 
 const URL = process.env.REACT_APP_SERVER_URL;
-const Navbar = ({ link, aboutRef, partnersRef, setShowSignModal }) => {
+const Navbar = ({
+  link,
+  aboutRef,
+  partnersRef,
+  setShowSignModal,
+  setShowProfileModal,
+}) => {
   const userInfo = useSelector(state => state.userReducer.user);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -79,6 +85,18 @@ const Navbar = ({ link, aboutRef, partnersRef, setShowSignModal }) => {
           <i className={`fas fa-palette ${styles.fa_palette}`} />
           DailyDrawing
         </Link>
+        {accessToken ? (
+          <div className={`${styles.user} ${styles.userbox_react}`}>
+            <img
+              src={`${URL}/profile/get/${userInfo.profileImg}`}
+              className={styles.user_Img}
+              onClick={() => {
+                setShowProfileModal(true);
+              }}
+            />
+            <span className={styles.user_nick}>{userInfo.nickname}</span>
+          </div>
+        ) : null}
         <div className={styles.icon} onClick={handleClick}>
           <i
             className={
@@ -211,6 +229,9 @@ const Navbar = ({ link, aboutRef, partnersRef, setShowSignModal }) => {
                 <img
                   src={`${URL}/profile/get/${userInfo.profileImg}`}
                   className={styles.user_Img}
+                  onClick={() => {
+                    setShowProfileModal(true);
+                  }}
                 />
                 <span className={styles.user_nick}>{userInfo.nickname}</span>
                 <button className={styles.btn_logout} onClick={handleBtnLogOut}>

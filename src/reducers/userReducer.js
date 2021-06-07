@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT } from "../actions";
+import { PATCH_USER_PROFILE, SIGN_IN, SIGN_OUT } from "../actions";
 import { initialState } from "./initialState";
 
 const userReducer = (state = initialState, action) => {
@@ -10,6 +10,10 @@ const userReducer = (state = initialState, action) => {
     case SIGN_OUT:
       return Object.assign({}, state, {
         user: action.payload,
+      });
+    case PATCH_USER_PROFILE:
+      return Object.assign({}, state, {
+        user: { ...state.user, profileImg: action.payload },
       });
     default:
       return state;

@@ -17,6 +17,7 @@ export const SIGN_IN = "SIGN_IN";
 export const SIGN_OUT = "SIGN_OUT";
 // user part
 export const GET_USER_INFO = "GET_USER_INFO";
+export const PATCH_USER_PROFILE = "PATCH_USER_PROFILE";
 // post part
 export const GET_POST_INFO = "GET_POST_INFO";
 export const GETALL_POST_INFO = "GETALL_POST_INFO";
@@ -57,6 +58,12 @@ export const getUserInfo = ({ userInfo }) => {
   return {
     type: GET_USER_INFO,
     payload: userInfo,
+  };
+};
+export const patchUserProfile = ({ profileImg }) => {
+  return {
+    type: PATCH_USER_PROFILE,
+    payload: profileImg,
   };
 };
 

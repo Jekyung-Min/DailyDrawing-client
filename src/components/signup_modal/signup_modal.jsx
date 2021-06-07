@@ -1,7 +1,9 @@
+import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./signup_modal.module.css";
 import Fade from "react-reveal/Fade";
 
+const URL = process.env.REACT_APP_SERVER_URL;
 const Signup_modal = ({ showSignUpModal, setShowSignUpModal }) => {
   const backRef = useRef();
   const [message, setMessage] = useState("");
@@ -12,19 +14,19 @@ const Signup_modal = ({ showSignUpModal, setShowSignUpModal }) => {
     repassword: "",
   });
 
-  const closeModal = (e) => {
+  const closeModal = e => {
     if (backRef.current === e.target) {
       setShowSignUpModal(false);
     }
   };
 
-  const handleUserInfo = (key) => (event) => {
-    setUserInfo((preState) => ({ ...preState, [key]: event.target.value }));
+  const handleUserInfo = key => event => {
+    setUserInfo(preState => ({ ...preState, [key]: event.target.value }));
   };
 
   const validCheck = () => {
     const { email, password, repassword } = userInfo;
-    const isFill = Object.keys(userInfo).every((key) => userInfo[key] !== "");
+    const isFill = Object.keys(userInfo).every(key => userInfo[key] !== "");
     if (!isFill) {
       return setMessage("모든 정보를 입력해주세요.");
     } else if (email.includes("@") === false) {
@@ -35,12 +37,27 @@ const Signup_modal = ({ showSignUpModal, setShowSignUpModal }) => {
     return true;
   };
 
-  const submitUserInfo = () => {
+  const submitUserInfo = async () => {
     const isTrue = validCheck();
     if (isTrue) {
       setMessage("");
-      console.log("서버요청");
-      setShowSignUpModal(false);
+      try {
+        const { email, nickname, password } = userInfo;
+        await axios.post(`${URL}/sign/up`, {
+          email,
+          nickname,
+          password,
+          profileImg: "profileImg00.png",
+        });
+        setShowSignUpModal(false);
+      } catch (err) {
+        const msg = err.response.data.message;
+        if (msg === "NickName already exists") {
+          setMessage("이미 존재하는 닉네임입니다.");
+        } else if (msg === "Email already exists") {
+          setMessage("이미 존재하는 이메일입니다.");
+        }
+      }
     }
   };
 
@@ -49,13 +66,13 @@ const Signup_modal = ({ showSignUpModal, setShowSignUpModal }) => {
       {showSignUpModal ? (
         <div className={styles.back} onClick={closeModal} ref={backRef}>
           <div className={styles.container}>
-            <div
-              className={styles.close}
-              onClick={() => {
-                setShowSignUpModal((pre) => !pre);
-              }}
-            >
-              <i className="fas fa-times"></i>
+            <div className={styles.close}>
+              <i
+                className="fas fa-times"
+                onClick={() => {
+                  setShowSignUpModal(pre => !pre);
+                }}
+              ></i>
             </div>
             <h4 className={styles.title}>Sign Up</h4>
             <div className={styles.user}>
