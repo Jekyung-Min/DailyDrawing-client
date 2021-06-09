@@ -1,0 +1,55 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 20px 4px 4px 16px;
+  background-color: transparent;
+  color: black;
+}
+
+.searchWrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.searchBarWrapper {
+  background-color: var(--container-color);
+  display: flex;
+  height: 48px;
+  width: 70%;
+  border-radius: 50px;
+  border: none;
+  padding-left: 10px;
+}
+
+.fa_search {
+  color: #726b6a;
+}
+
+.searchBarWrapper > form {
+  display: flex;
+  flex: 1;
+}
+
+.searchBarWrapper > form > input {
+  background-color: transparent;
+  color: var(--header-color);
+  border: none;
+  width: 100%;
+  margin-left: 5px;
+  font-size: 16px;
+}
+
+.search_input::placeholder {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+.searchBarWrapper > form > input:focus {
+  outline: none;
+}
+
+.searchBarWrapper > form > button {
+  display: none;
+}

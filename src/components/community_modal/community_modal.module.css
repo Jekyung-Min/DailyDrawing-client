@@ -1,0 +1,251 @@
+.back {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  z-index: 99;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--body-color);
+  border-radius: 1rem;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.close:hover {
+  color: red;
+}
+
+.post {
+  margin: 1rem;
+}
+.postAndComment {
+  display: flex;
+  margin-top: 1rem;
+}
+/* post 유저정보 */
+.post_userInfo {
+  display: flex;
+
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.userInfo_img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0;
+}
+.userInfo_nickname {
+  margin-left: 1rem;
+}
+
+/* post 게시물 css */
+
+.post_title {
+  font-size: 1rem;
+  font-weight: 550;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.postImg {
+  width: 400px;
+}
+/* post 좋아요, 댓글 아이콘 css */
+.icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+.icon_like {
+  color: crimson;
+  cursor: pointer;
+}
+.icon_reply {
+  cursor: pointer;
+}
+.likeCount {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+  margin-right: 3rem;
+}
+
+/* 댓글창 css  */
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 2rem 3rem 1rem 2rem;
+  transition: all 1s ease-out;
+}
+.comment {
+  margin-bottom: 0.3rem;
+}
+.comment_colon {
+  margin-left: 0.2rem;
+  margin-right: 0.5rem;
+}
+
+.showComments {
+  overflow-y: auto;
+  height: 80%;
+}
+/* 댓글 입력창 */
+.msg {
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  font-style: italic;
+}
+.comment_upload {
+  display: flex;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.comment_upload > i {
+  cursor: pointer;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 6px;
+  left: 15px;
+}
+
+.comment_upload > input {
+  background-color: var(--container-color);
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.7rem 0;
+  padding-left: 3rem;
+  color: var(--header-color);
+  border-radius: 5rem;
+}
+
+.comment_upload > input::placeholder {
+  font-size: 1rem;
+  color: #a49eac;
+}
+
+.comment_upload_second {
+  display: flex;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.comment_upload_second > i {
+  cursor: pointer;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 6px;
+  left: 15px;
+}
+
+.comment_upload_second > input {
+  background-color: var(--container-color);
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.7rem 0;
+  padding-left: 3rem;
+  color: var(--header-color);
+  border-radius: 5rem;
+}
+
+.comment_upload_second > input::placeholder {
+  font-size: 1rem;
+  color: #a49eac;
+}
+
+/* reply toggle 후 */
+.container.active {
+  width: 500px;
+}
+.comments.active {
+  display: none;
+}
+.postAndComment.active {
+  justify-content: center;
+}
+
+@media screen and (min-width: 200px) {
+  .container {
+    width: 320px;
+  }
+  .container.active {
+    width: 320px;
+  }
+  .postImg {
+    width: 280px;
+    height: auto;
+  }
+
+  .comments {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 503px) {
+  .container {
+    width: 400px;
+  }
+  .container.active {
+    width: 400px;
+  }
+  .postImg {
+    width: 360px;
+    height: auto;
+  }
+
+  .comments {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 757px) {
+  .container {
+    width: 720px;
+  }
+  .container.active {
+    width: 500px;
+  }
+
+  .postAndComment.active .postImg {
+    width: 380px;
+  }
+
+  .comments {
+    display: flex;
+  }
+
+  .comment_upload_second {
+    display: none;
+  }
+
+  .msg_second {
+    display: none;
+  }
+}

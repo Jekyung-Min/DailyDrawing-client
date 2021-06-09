@@ -1,0 +1,112 @@
+button {
+  outline: none;
+  border: none;
+}
+.back {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  z-index: 99;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 550px;
+  background-color: #f2f2f2;
+  border-radius: 1rem;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.6);
+}
+
+.close {
+  text-align: end;
+  font-size: 1.2rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+}
+.close > i {
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.close > i:hover {
+  color: red;
+}
+.title {
+  color: black;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+}
+.user {
+  display: flex;
+  position: relative;
+  color: hsl(var(--hue-color), 8%, 45%);
+  margin-bottom: 1rem;
+}
+
+.user > i {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 12px;
+  left: 35px;
+}
+
+.user > input {
+  border: none;
+  outline: none;
+  width: 360px;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 1rem 0;
+  padding-left: 3rem;
+  color: #23004d;
+  margin-left: 20px;
+  border-radius: 0.5rem;
+}
+
+.user > input::placeholder {
+  font-size: 1rem;
+  color: #a49eac;
+}
+
+.btn_signUp {
+  text-align: center;
+  padding: 1.3rem;
+  margin: 0 1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  color: #fff;
+  background-color: var(--first-color);
+  transition: all 0.3s ease-out;
+  margin-top: 1.5rem;
+}
+
+.btn_signUp:hover {
+  color: black;
+  background-color: #fff;
+}
+
+.errMsg {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: crimson;
+}
+.errMsg_margin {
+  margin-top: 3rem;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 330px;
+  }
+
+  .user > input {
+    width: 280px;
+  }
+}
